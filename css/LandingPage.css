@@ -1243,7 +1243,7 @@ a:hover {
   }
 }
 
-/* Common Section Heading Style */
+/* Common Section Heading Style - Ensuring consistent sizes */
 .section h2,
 .projects-section h2,
 .expertise-section h2,
@@ -1502,7 +1502,7 @@ a:hover {
 }
 
 .ethos-section h2 {
-   font-size: 1.1rem;
+  font-size: 2.5rem; /* Explicitly set to match other headings */
 }
 
 .expertise-contact {
