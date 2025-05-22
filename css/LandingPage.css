@@ -1,0 +1,138 @@
+/* Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background-color: #000; /* Set black background */
+  color: #fff; 
+}
+
+.section {
+  padding: 2rem;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #fff;
+}
+
+p, a, span, div {
+  font-weight: 300;
+  color: #ddd;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ffcc70; /* soft highlight */
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  color: #fff;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-links a {
+  color: #fff;
+  margin: 0 0.75rem;
+  font-weight: 400;
+}
+
+.nav-links a:hover {
+  color: #ffcc70;
+}
+
+/* Slideshow */
+.slideshow .slides {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 200px;
+  background: #444;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Grid for Expertise & Projects */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card, .project-card {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #fff;
+}
+
+/* Testimonials */
+.testimonial {
+  max-width: 600px;
+  margin: auto;
+  font-style: italic;
+  color: #ccc;
+}
+
+/* Footer */
+.footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+
+/* Our Projects Section */
+.projects-section {
+  padding: 2rem;
+  background: #000;
+}
+
+.projects-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.project-card {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 200px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  scroll-snap-align: start;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
