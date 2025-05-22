@@ -1502,7 +1502,7 @@ a:hover {
 }
 
 .ethos-section h2 {
-  /* Ensure heading is using common styles only */
+   font-size: 1.1rem;
 }
 
 .expertise-contact {
