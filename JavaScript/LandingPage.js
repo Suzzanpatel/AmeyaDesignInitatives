@@ -123,43 +123,143 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Welcome Section Image Slider
-  const slides = document.querySelectorAll('.slide');
-  const indicators = document.querySelectorAll('.indicator');
-  let currentSlide = 0;
-  const slideInterval = 5000; // Change slide every 5 seconds
+  const imageSlider = document.querySelector('.image-slider');
   
-  // Function to show a specific slide
-  function showSlide(index) {
-    // Remove active class from all slides and indicators
-    slides.forEach(slide => slide.classList.remove('active'));
-    indicators.forEach(indicator => indicator.classList.remove('active'));
+  if (imageSlider) {
+    const slides = imageSlider.querySelectorAll('.slide');
+    const indicators = imageSlider.querySelectorAll('.indicator');
+    const prevSlideBtn = imageSlider.querySelector('.prev-slide');
+    const nextSlideBtn = imageSlider.querySelector('.next-slide');
+    let currentSlide = 0;
+    let slideTimer;
+    const slideInterval = 5000; // Change slide every 5 seconds
     
-    // Add active class to current slide and indicator
-    slides[index].classList.add('active');
-    indicators[index].classList.add('active');
-    
-    currentSlide = index;
-  }
-  
-  // Auto slide functionality
-  let slideTimer = setInterval(() => {
-    let nextSlide = (currentSlide + 1) % slides.length;
-    showSlide(nextSlide);
-  }, slideInterval);
-  
-  // Click event for indicators
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      clearInterval(slideTimer);
-      showSlide(index);
+    // Function to show a specific slide
+    function showSlide(index) {
+      // Handle wrap-around
+      if (index >= slides.length) index = 0;
+      if (index < 0) index = slides.length - 1;
       
-      // Restart the timer
-      slideTimer = setInterval(() => {
-        let nextSlide = (currentSlide + 1) % slides.length;
-        showSlide(nextSlide);
-      }, slideInterval);
+      // Remove active class from all slides and indicators
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+        slide.style.transition = 'opacity 0.5s ease-in-out';
+      });
+      indicators.forEach(indicator => indicator.classList.remove('active'));
+      
+      // Add active class to current slide and indicator
+      slides[index].classList.add('active');
+      indicators[index].classList.add('active');
+      
+      currentSlide = index;
+    }
+    
+    // Function to move to next slide
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+    
+    // Function to move to previous slide
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+    
+    // Function to start auto-sliding
+    function startAutoSlide() {
+      stopAutoSlide(); // Clear any existing timer
+      slideTimer = setInterval(nextSlide, slideInterval);
+    }
+    
+    // Function to stop auto-sliding
+    function stopAutoSlide() {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+      }
+    }
+    
+    // Event listeners for navigation arrows
+    if (prevSlideBtn) {
+      prevSlideBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide(); // Restart timer after manual navigation
+      });
+    }
+    
+    if (nextSlideBtn) {
+      nextSlideBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide(); // Restart timer after manual navigation
+      });
+    }
+    
+    // Click event for indicators
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        showSlide(index);
+        stopAutoSlide();
+        startAutoSlide(); // Restart timer after manual navigation
+      });
     });
-  });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+      }
+    });
+    
+    // Touch events for mobile
+    let touchStartX = null;
+    let touchEndX = null;
+    
+    imageSlider.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      stopAutoSlide();
+    }, { passive: true });
+    
+    imageSlider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      handleSwipe();
+      startAutoSlide();
+    }, { passive: true });
+    
+    function handleSwipe() {
+      if (!touchStartX || !touchEndX) return;
+      
+      const swipeDistance = touchEndX - touchStartX;
+      const minSwipeDistance = 50;
+      
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          prevSlide(); // Swipe right = previous slide
+        } else {
+          nextSlide(); // Swipe left = next slide
+        }
+      }
+      
+      touchStartX = null;
+      touchEndX = null;
+    }
+    
+    // Pause auto-sliding when user hovers over the slider
+    imageSlider.addEventListener('mouseenter', stopAutoSlide);
+    imageSlider.addEventListener('mouseleave', startAutoSlide);
+    
+    // Start auto-sliding when the page loads
+    showSlide(0); // Show first slide
+    startAutoSlide();
+  }
   
   // Projects Carousel Functionality
   const projectCardsWrapper = document.getElementById('projectCardsWrapper');

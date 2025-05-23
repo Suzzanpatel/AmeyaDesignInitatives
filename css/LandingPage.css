@@ -1783,3 +1783,62 @@ html, body {
   }
 }
 
+/* Slider Navigation */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-nav:hover {
+  background: rgba(255, 204, 112, 0.5);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-slide {
+  left: 20px;
+}
+
+.next-slide {
+  right: 20px;
+}
+
+/* Responsive adjustments for slider navigation */
+@media screen and (max-width: 768px) {
+  .slider-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .prev-slide {
+    left: 10px;
+  }
+  
+  .next-slide {
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+

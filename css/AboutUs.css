@@ -2,14 +2,15 @@
 .about-banner {
   position: relative;
   width: 100%;
-  height: 45vh;
-  background-image: url('../img/about-banner.jpg');
+  height: 500px;
+  background-image: url('/Assets/AboutUs/AboutUs.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.5rem;
   overflow: hidden;
 }
 
@@ -28,39 +29,28 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('../img/about-banner.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.banner-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
-  z-index: -1;
+  padding: 0 2rem;
 }
 
 .banner-content h1 {
   font-family: 'Playfair Display', serif;
   font-size: 3.5rem;
-  font-weight: 600;
   color: #fff;
   margin: 0;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  position: relative;
-  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 1px;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* About Content Section */
@@ -307,7 +297,7 @@
 
 @media screen and (max-width: 768px) {
   .about-banner {
-    height: 50vh;
+    height: 400px;
   }
   
   .about-content {
@@ -315,7 +305,7 @@
   }
   
   .banner-content h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .about-text h2 {
@@ -355,11 +345,11 @@
 
 @media screen and (max-width: 576px) {
   .about-banner {
-    height: 40vh;
+    height: 300px;
   }
   
   .banner-content h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
   
   .about-content {
