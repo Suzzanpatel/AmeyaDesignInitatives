@@ -692,21 +692,20 @@
   }
 }
 
-/* Contact Us Button */
-.contact-button-container {
+/* Contact Button Styles */
+.contact-btn-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
   background-color: #000;
-  margin-top: -2rem;
 }
 
-.contact-button {
+.contact-btn {
   display: inline-block;
-  padding: 1.2rem 3rem;
+  padding: 1rem 2.5rem;
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #ffcc70;
   background-color: transparent;
   border: 2px solid #ffcc70;
@@ -720,56 +719,36 @@
   letter-spacing: 1px;
 }
 
-.contact-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 204, 112, 0.2),
-    rgba(255, 204, 112, 0.3),
-    rgba(255, 204, 112, 0.2),
-    transparent
-  );
-  transition: all 0.5s ease;
-  z-index: -1;
-}
-
-.contact-button:hover {
+.contact-btn:hover {
   color: #fff;
   border-color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 204, 112, 0.2);
 }
 
-.contact-button:hover::before {
-  left: 100%;
+.expertise-contact {
+  margin-top: -1rem;
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
-  .contact-button-container {
-    padding: 3rem 0;
-    margin-top: -1.5rem;
+  .contact-btn-container {
+    padding: 1.5rem 0;
   }
 
-  .contact-button {
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+  .contact-btn {
+    padding: 0.875rem 2rem;
+    font-size: 1.1rem;
   }
 }
 
 @media screen and (max-width: 576px) {
-  .contact-button-container {
-    padding: 2.5rem 0;
-    margin-top: -1rem;
+  .contact-btn-container {
+    padding: 1rem 0;
   }
 
-  .contact-button {
-    padding: 0.875rem 2rem;
-    font-size: 1.1rem;
+  .contact-btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
   }
 }

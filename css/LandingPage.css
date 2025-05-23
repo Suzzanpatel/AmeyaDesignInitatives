@@ -928,7 +928,7 @@ a:hover {
 /* Welcome Section */
 .welcome-section {
   position: relative;
-  padding: 2rem 0 2rem 0;
+  padding: 0 0 2rem 0;
   background-color: #000;
   overflow: hidden;
 }
@@ -961,7 +961,7 @@ a:hover {
   font-size: 3.5rem;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   letter-spacing: 1px;
   position: relative;
   display: inline-block;
@@ -1103,7 +1103,7 @@ a:hover {
 
 @media screen and (max-width: 768px) {
   .welcome-section {
-    padding: 3rem 0;
+    padding: 0 0 1.5rem;
   }
   
   .image-slider {
@@ -1123,6 +1123,10 @@ a:hover {
 @media screen and (max-width: 576px) {
   .image-slider {
     height: 250px;
+  }
+  
+  .welcome-section {
+    padding: 0 0 1rem;
   }
   
   .welcome-content h1 {
