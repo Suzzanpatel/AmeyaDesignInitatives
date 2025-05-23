@@ -237,7 +237,9 @@
   font-weight: 600;
   margin-bottom: 0.25rem;
   position: relative;
+  color: #ffcc70; /* Fallback color */
   background: linear-gradient(45deg, #ffcc70, #ffd700);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
