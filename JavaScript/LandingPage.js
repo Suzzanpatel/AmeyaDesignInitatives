@@ -5,9 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const rightDoor = document.querySelector('.splash-door.right');
   const mainContent = document.querySelector('.main-content');
   const logoTransition = document.querySelector('.logo-transition');
+  const logoContainer = document.querySelector('.logo-container');
+  let doorsOpened = false;
   
   // Get all sections for reveal animation
   const sections = document.querySelectorAll('.welcome-section, .expertise-section, .projects-section, .testimonials-section, .awards-container, .ethos-section');
+
+  // Function to check if element is in viewport
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
 
   // Function to handle section reveal on scroll
   function revealSection(entries, observer) {
@@ -20,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         childElements.forEach((element, index) => {
           setTimeout(() => {
             element.classList.add('reveal');
-          }, index * 100); // 100ms delay between each element
+          }, index * 100);
         });
         
         observer.unobserve(entry.target);
@@ -30,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Create the intersection observer with smoother threshold
   const sectionObserver = new IntersectionObserver(revealSection, {
-    threshold: 0.2, // Trigger when 20% of the section is visible
-    rootMargin: '0px 0px -10% 0px' // Slightly offset the trigger point
+    threshold: 0.2,
+    rootMargin: '0px 0px -10% 0px'
   });
 
   // Function to start observing sections
@@ -41,38 +54,146 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Function to start the animation sequence
-  function startAnimationSequence() {
-    // Step 1: Initial delay before door animation
+  // Enhanced mobile touch handling for doors
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // Disable hover effects on mobile
+    const doors = document.querySelectorAll('.splash-door');
+    doors.forEach(door => {
+      door.addEventListener('touchstart', (e) => {
+        if (!doorsOpened) {
+          const handle = door.querySelector('.door-handle');
+          handle.style.transform = 'translateY(-50%) scale(1.1)';
+        }
+      }, { passive: true });
+
+      door.addEventListener('touchend', (e) => {
+        if (!doorsOpened) {
+          const handle = door.querySelector('.door-handle');
+          handle.style.transform = 'translateY(-50%) scale(1)';
+        }
+      });
+    });
+
+    // Optimize door opening animation for mobile
+    function openDoorsForMobile() {
+      if (doorsOpened) return;
+      
+      // Add opening class with mobile-optimized timing
+      leftDoor.classList.add('opening');
+      rightDoor.classList.add('opening');
+      
+      // Use shorter animation duration for mobile but keep it smooth
+      leftDoor.style.transition = 'transform 2.5s cubic-bezier(0.22, 1, 0.36, 1)';
+      rightDoor.style.transition = 'transform 2.5s cubic-bezier(0.22, 1, 0.36, 1)';
+      
+      setTimeout(() => {
+        leftDoor.classList.add('open');
+        rightDoor.classList.add('open');
+        doorsOpened = true;
+
+        // Fade out splash screen with mobile-optimized timing
+        setTimeout(() => {
+          splashScreen.classList.add('fade-out');
+          
+          // Show logo transition
+          logoTransition.classList.add('visible');
+          logoContainer.style.transform = 'scale(1)';
+          logoContainer.style.opacity = '1';
+
+          // Hide logo and show main content with adjusted timing
+          setTimeout(() => {
+            logoTransition.classList.add('fade-out');
+            mainContent.classList.add('visible');
+            
+            setTimeout(() => {
+              startSectionObservers();
+              
+              // Optimize initial section reveals for mobile
+              const initialSections = document.querySelectorAll('.welcome-section, .expertise-section');
+              initialSections.forEach(section => {
+                if (isElementInViewport(section)) {
+                  section.classList.add('reveal');
+                  
+                  const childElements = section.querySelectorAll('.expertise-box, .project-card');
+                  childElements.forEach((element, index) => {
+                    setTimeout(() => {
+                      element.classList.add('reveal');
+                    }, index * 100);
+                  });
+                }
+              });
+            }, 600);
+          }, 2000);
+        }, 1500);
+      }, 100);
+    }
+
+    // Replace original openDoors function with mobile version
+    window.openDoors = openDoorsForMobile;
+
+    // Trigger automatic door opening sooner on mobile
     setTimeout(() => {
-      // Add smooth opening animation to doors
-      const leftDoor = document.querySelector('.splash-door.left');
-      const rightDoor = document.querySelector('.splash-door.right');
-      
-      leftDoor.style.transition = 'transform 3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      rightDoor.style.transition = 'transform 3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      
+      if (!doorsOpened) {
+        openDoorsForMobile();
+      }
+    }, 1000); // Faster initial delay for mobile
+  }
+
+  // Function to check viewport width
+  function isLaptopView() {
+    return window.innerWidth >= 769 && window.innerWidth <= 1366;
+  }
+
+  // Function to check larger screens
+  function isLargeScreen() {
+    return window.innerWidth > 1366;
+  }
+
+  // Function to get perspective based on screen size
+  function getPerspective() {
+    if (isLargeScreen()) return 4000;
+    if (isLaptopView()) return 3000;
+    return 2000;
+  }
+
+  // Function to handle door opening
+  function openDoors() {
+    if (doorsOpened) return;
+    
+    const perspective = getPerspective();
+    
+    leftDoor.classList.add('opening');
+    rightDoor.classList.add('opening');
+    
+    // Set transition with smoother timing
+    leftDoor.style.transition = 'transform 4s cubic-bezier(0.22, 1, 0.36, 1)';
+    rightDoor.style.transition = 'transform 4s cubic-bezier(0.22, 1, 0.36, 1)';
+    
+    // Force a reflow to ensure the transition works
+    leftDoor.offsetHeight;
+    rightDoor.offsetHeight;
+    
+    setTimeout(() => {
       leftDoor.classList.add('open');
       rightDoor.classList.add('open');
-      
-      // Step 2: Fade out splash screen and show logo with smooth transition
+      doorsOpened = true;
+
+      // Fade out splash screen after doors open
       setTimeout(() => {
-        const splashScreen = document.getElementById('splashScreen');
-        const logoTransition = document.querySelector('.logo-transition');
-        
-        splashScreen.style.transition = 'opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)';
         splashScreen.classList.add('fade-out');
         
-        logoTransition.style.transition = 'opacity 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)';
+        // Show logo transition
         logoTransition.classList.add('visible');
-        
-        // Step 3: Smooth transition to main content
+        logoContainer.style.transform = 'scale(1)';
+        logoContainer.style.opacity = '1';
+
+        // Hide logo and show main content
         setTimeout(() => {
           logoTransition.classList.add('fade-out');
-          const mainContent = document.querySelector('.main-content');
           mainContent.classList.add('visible');
           
-          // Start observing sections after main content is visible
           setTimeout(() => {
             startSectionObservers();
             
@@ -82,119 +203,83 @@ document.addEventListener('DOMContentLoaded', function() {
               if (isElementInViewport(section)) {
                 section.classList.add('reveal');
                 
-                // Reveal child elements
+                // Reveal child elements with slower stagger
                 const childElements = section.querySelectorAll('.expertise-box, .project-card');
                 childElements.forEach((element, index) => {
                   setTimeout(() => {
                     element.classList.add('reveal');
-                  }, index * 100);
+                  }, index * 200);
                 });
               }
             });
-          }, 600);
-        }, 2000); // Duration for logo display
-      }, 2400); // Increased time between door opening and logo appearance
-    }, 400); // Initial delay
+          }, 1000);
+        }, 3000); // Longer logo display duration
+      }, 4000); // Increased delay to match door animation
+    }, 100);
   }
 
-  // Start the animation sequence
-  startAnimationSequence();
-});
+  // Add click listeners to door handles
+  const doorHandles = document.querySelectorAll('.door-handle');
+  doorHandles.forEach(handle => {
+    handle.addEventListener('click', openDoors);
+  });
 
-// Door Animation
-document.addEventListener('DOMContentLoaded', () => {
-    const leftDoor = document.querySelector('.splash-door.left');
-    const rightDoor = document.querySelector('.splash-door.right');
-    const splashScreen = document.getElementById('splashScreen');
-    const mainContent = document.querySelector('.main-content');
-    const logoTransition = document.querySelector('.logo-transition');
-    let doorsOpened = false;
-
-    // Function to handle door opening
-    function openDoors() {
-        if (doorsOpened) return;
-        
-        leftDoor.classList.add('opening');
-        rightDoor.classList.add('opening');
-        
-        // Add open class with slight delay for visual effect
-        setTimeout(() => {
-            leftDoor.classList.add('open');
-            rightDoor.classList.add('open');
-        }, 100);
-
-        // Handle transition after doors open
-        setTimeout(() => {
-            splashScreen.classList.add('fade-out');
-            doorsOpened = true;
-
-            // Show logo transition
-            logoTransition.style.opacity = '1';
-            logoTransition.classList.add('visible');
-
-            // Handle logo animation
-            setTimeout(() => {
-                logoTransition.classList.add('fade-out');
-                mainContent.classList.add('visible');
-                
-                // Initialize other animations after content is visible
-                initializePageAnimations();
-            }, 2000);
-        }, 2000);
-    }
-
-    // Add click listeners to door handles
-    const doorHandles = document.querySelectorAll('.door-handle');
-    doorHandles.forEach(handle => {
-        handle.addEventListener('click', openDoors);
-    });
-
-    // Add hover effects
+  // Add hover effects for non-mobile devices
+  if (!window.matchMedia('(max-width: 768px)').matches) {
     const doors = document.querySelectorAll('.splash-door');
     doors.forEach(door => {
-        door.addEventListener('mouseenter', () => {
-            if (!doorsOpened) {
-                door.querySelector('.door-surface').style.transform = 'scale(0.99)';
-                door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1.1)';
-            }
-        });
-
-        door.addEventListener('mouseleave', () => {
-            if (!doorsOpened) {
-                door.querySelector('.door-surface').style.transform = 'scale(1)';
-                door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1)';
-            }
-        });
-    });
-
-    // Add subtle door movement on mouse move
-    document.addEventListener('mousemove', (e) => {
-        if (doorsOpened) return;
-
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-        
-        const leftRotation = (mouseX - 0.5) * 2;
-        const rightRotation = (mouseX - 0.5) * -2;
-        const verticalTilt = (mouseY - 0.5) * 2;
-
-        leftDoor.style.transform = `perspective(2000px) rotateY(${leftRotation}deg) rotateX(${verticalTilt}deg)`;
-        rightDoor.style.transform = `perspective(2000px) rotateY(${rightRotation}deg) rotateX(${verticalTilt}deg)`;
-    });
-
-    // Auto-open doors after a delay if user hasn't interacted
-    const autoOpenTimeout = setTimeout(() => {
+      door.addEventListener('mouseenter', () => {
         if (!doorsOpened) {
-            openDoors();
+          door.querySelector('.door-surface').style.transform = 'scale(0.99)';
+          door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1.1)';
+          door.querySelector('.door-handle').style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         }
-    }, 5000);
+      });
 
-    // Cancel auto-open if user interacts with the doors
-    doors.forEach(door => {
-        door.addEventListener('mouseenter', () => {
-            clearTimeout(autoOpenTimeout);
-        });
+      door.addEventListener('mouseleave', () => {
+        if (!doorsOpened) {
+          door.querySelector('.door-surface').style.transform = 'scale(1)';
+          door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1)';
+        }
+      });
     });
+
+    // Add subtle door movement on mouse move with slower response
+    document.addEventListener('mousemove', (e) => {
+      if (doorsOpened) return;
+
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      const leftRotation = (mouseX - 0.5) * 1.5; // Reduced rotation amount
+      const rightRotation = (mouseX - 0.5) * -1.5;
+      const verticalTilt = (mouseY - 0.5) * 1.5;
+
+      const perspective = getPerspective();
+      
+      leftDoor.style.transition = 'transform 0.3s ease-out';
+      rightDoor.style.transition = 'transform 0.3s ease-out';
+      
+      leftDoor.style.transform = `perspective(${perspective}px) rotateY(${leftRotation}deg) rotateX(${verticalTilt}deg)`;
+      rightDoor.style.transform = `perspective(${perspective}px) rotateY(${rightRotation}deg) rotateX(${verticalTilt}deg)`;
+    });
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    const perspective = getPerspective();
+    if (!doorsOpened) {
+      leftDoor.style.transform = `perspective(${perspective}px) rotateY(0deg)`;
+      rightDoor.style.transform = `perspective(${perspective}px) rotateY(0deg)`;
+    }
+  });
+
+  // Trigger automatic door opening with longer initial delay
+  setTimeout(() => {
+    if (!doorsOpened) {
+      openDoors();
+    }
+  }, 2500);
 });
 
 // Initialize page animations
