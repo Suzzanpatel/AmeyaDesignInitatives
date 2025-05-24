@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const leftDoor = document.querySelector('.splash-door.left');
       const rightDoor = document.querySelector('.splash-door.right');
       
-      leftDoor.style.transition = 'transform 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      rightDoor.style.transition = 'transform 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      leftDoor.style.transition = 'transform 3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      rightDoor.style.transition = 'transform 3s cubic-bezier(0.34, 1.56, 0.64, 1)';
       
       leftDoor.classList.add('open');
       rightDoor.classList.add('open');
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
           }, 600);
         }, 2000); // Duration for logo display
-      }, 1200); // Reduced time between door opening and logo appearance
+      }, 2400); // Increased time between door opening and logo appearance
     }, 400); // Initial delay
   }
 
