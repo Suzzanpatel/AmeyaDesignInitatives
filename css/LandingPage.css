@@ -1899,233 +1899,22 @@ html, body {
   height: 100%;
   position: absolute;
   background: #111;
-  transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: left;
+  transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   overflow: hidden;
-}
-
-.door-surface {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(30,30,30,1) 0%,
-    rgba(40,40,40,1) 50%,
-    rgba(25,25,25,1) 100%
-  );
-  box-shadow: 
-    inset 0 0 100px rgba(0,0,0,0.5),
-    0 0 50px rgba(0,0,0,0.8);
-}
-
-.door-glass {
-  position: absolute;
-  top: 40px;
-  bottom: 40px;
-  width: 70%;
-  left: 15%;
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 
-    0 0 30px rgba(255,255,255,0.05),
-    inset 0 0 20px rgba(255,255,255,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 2px;
-  transition: all 0.3s ease;
-}
-
-.glass-panel {
-  flex: 1;
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.1) 0%,
-    rgba(255,255,255,0.05) 50%,
-    rgba(255,255,255,0.02) 100%
-  );
-  border: 1px solid rgba(255,255,255,0.1);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.glass-panel::before {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background: linear-gradient(
-    45deg,
-    transparent 0%,
-    rgba(255,255,255,0.1) 50%,
-    transparent 100%
-  );
-  transform: rotate(45deg);
-  animation: lightSweep 5s infinite linear;
-  pointer-events: none;
-}
-
-@keyframes lightSweep {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) rotate(45deg); }
-}
-
-.door-handle {
-  position: absolute;
-  top: 50%;
-  width: 60px;
-  height: 400px;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.handle-bar {
-  width: 12px;
-  height: 280px;
-  background: linear-gradient(90deg,
-    #b8860b 0%,
-    #daa520 50%,
-    #b8860b 100%
-  );
-  border-radius: 6px;
-  position: relative;
-  box-shadow: 
-    2px 0 15px rgba(218,165,32,0.2),
-    -2px 0 15px rgba(218,165,32,0.2),
-    0 0 30px rgba(218,165,32,0.1);
-}
-
-.handle-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0.1) 0%,
-    rgba(255,255,255,0.3) 50%,
-    rgba(255,255,255,0.1) 100%
-  );
-  border-radius: 6px;
-  opacity: 0.7;
-}
-
-.handle-mount {
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(135deg,
-    #b8860b 0%,
-    #daa520 50%,
-    #b8860b 100%
-  );
-  border-radius: 50%;
-  box-shadow: 
-    inset 0 0 10px rgba(0,0,0,0.3),
-    0 0 15px rgba(218,165,32,0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.handle-mount::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg,
-    transparent 0%,
-    rgba(255,255,255,0.2) 50%,
-    transparent 100%
-  );
-  animation: shimmer 2s infinite linear;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) rotate(45deg); }
-}
-
-.handle-bar:hover {
-  background: linear-gradient(90deg,
-    #daa520 0%,
-    #ffd700 50%,
-    #daa520 100%
-  );
-  box-shadow: 
-    2px 0 20px rgba(218,165,32,0.3),
-    -2px 0 20px rgba(218,165,32,0.3),
-    0 0 40px rgba(218,165,32,0.2);
-  transition: all 0.3s ease;
-}
-
-.handle-mount:hover {
-  background: linear-gradient(135deg,
-    #daa520 0%,
-    #ffd700 50%,
-    #daa520 100%
-  );
-  box-shadow: 
-    inset 0 0 15px rgba(0,0,0,0.3),
-    0 0 20px rgba(218,165,32,0.4);
-  transition: all 0.3s ease;
-}
-
-.door-edge {
-  position: absolute;
-  width: 20px;
-  height: 100%;
-  background: linear-gradient(90deg,
-    #202020 0%,
-    #252525 50%,
-    #202020 100%
-  );
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.5),
-    0 0 10px rgba(0,0,0,0.5);
-}
-
-.edge-detail {
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  background: rgba(255,255,255,0.1);
+  cursor: pointer;
 }
 
 .splash-door.left {
   left: 0;
   transform-origin: left;
+  transform: perspective(2000px) rotateY(0deg);
 }
 
 .splash-door.right {
   right: 0;
   transform-origin: right;
-}
-
-.splash-door.left .door-handle {
-  right: 40px;
-}
-
-.splash-door.right .door-handle {
-  left: 40px;
-}
-
-.splash-door.left .door-edge {
-  right: 0;
-}
-
-.splash-door.right .door-edge {
-  left: 0;
+  transform: perspective(2000px) rotateY(0deg);
 }
 
 .splash-door.left.open {
@@ -2136,46 +1925,148 @@ html, body {
   transform: perspective(2000px) rotateY(105deg);
 }
 
-.ambient-light {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255,255,255,0.03) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
+/* Door Handle Positioning */
+.splash-door.left .door-handle {
+  right: 40px;
 }
 
-.reflection {
+.splash-door.right .door-handle {
+  left: 40px;
+}
+
+/* Door Edge Positioning */
+.splash-door.left .door-edge {
+  right: 0;
+}
+
+.splash-door.right .door-edge {
+  left: 0;
+}
+
+/* Interactive Elements */
+.handle-bar {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.handle-bar:hover {
+  background: linear-gradient(90deg,
+    #daa520 0%,
+    #ffd700 50%,
+    #daa520 100%
+  );
+  box-shadow: 
+    2px 0 25px rgba(218,165,32,0.4),
+    -2px 0 25px rgba(218,165,32,0.4),
+    0 0 50px rgba(218,165,32,0.3);
+  transform: scale(1.05);
+}
+
+.handle-mount:hover {
+  background: linear-gradient(135deg,
+    #daa520 0%,
+    #ffd700 50%,
+    #daa520 100%
+  );
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.4),
+    0 0 30px rgba(218,165,32,0.5);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* Door Opening Animation */
+@keyframes doorOpen {
+  from {
+    transform: perspective(2000px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(2000px) rotateY(-105deg);
+  }
+}
+
+@keyframes doorOpenRight {
+  from {
+    transform: perspective(2000px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(2000px) rotateY(105deg);
+  }
+}
+
+/* Enhanced 3D Effects */
+.splash-door::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(255,255,255,0.02) 50%,
-    transparent 100%
+    to right,
+    rgba(0,0,0,0.2) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0,0,0,0.2) 100%
   );
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-.splash-door:hover .glass-panel {
+.splash-door.open::before {
+  opacity: 0.8;
+}
+
+/* Door Opening Transition Effects */
+.splash-door.opening .door-surface::before {
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.8),
+    0 0 70px rgba(0,0,0,0.9);
+  transition: box-shadow 0.5s ease;
+}
+
+.splash-door.opening .glass-panel {
   background: linear-gradient(135deg,
-    rgba(255,255,255,0.15) 0%,
-    rgba(255,255,255,0.08) 50%,
-    rgba(255,255,255,0.04) 100%
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.15) 50%,
+    rgba(255,255,255,0.1) 100%
   );
+  transition: all 0.5s ease;
 }
 
-#splashScreen.fade-out {
-  opacity: 0;
-  pointer-events: none;
+/* Performance Optimization */
+.splash-door {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Accessibility */
+.door-handle {
+  cursor: pointer;
+}
+
+.door-handle:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(218,165,32,0.5),
+    0 0 20px rgba(218,165,32,0.3);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .splash-door {
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .splash-door.left.open {
+    transform: perspective(1500px) rotateY(-95deg);
+  }
+  
+  .splash-door.right.open {
+    transform: perspective(1500px) rotateY(95deg);
+  }
 }
 
 /* Main Content Transitions */
@@ -2334,5 +2225,252 @@ html {
 .logo-transition.fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Royal Door Styles */
+.door-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    #4a3c2e 0%,
+    #6b563f 25%,
+    #8b7355 50%,
+    #6b563f 75%,
+    #4a3c2e 100%
+  );
+  box-shadow: 
+    inset 0 0 100px rgba(0,0,0,0.7),
+    0 0 50px rgba(0,0,0,0.8);
+  border: 8px solid #8b7355;
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+}
+
+.door-surface::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid #daa520;
+  box-shadow: 
+    inset 0 0 20px rgba(218,165,32,0.3),
+    0 0 15px rgba(218,165,32,0.2);
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.door-surface::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-image: 
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 10px,
+      rgba(218,165,32,0.1) 10px,
+      rgba(218,165,32,0.1) 20px
+    );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.door-glass {
+  position: absolute;
+  top: 80px;
+  bottom: 80px;
+  width: 60%;
+  left: 20%;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 3px solid #daa520;
+  box-shadow: 
+    0 0 30px rgba(218,165,32,0.1),
+    inset 0 0 20px rgba(218,165,32,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  transition: all 0.3s ease;
+}
+
+.glass-panel {
+  flex: 1;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 100%
+  );
+  border: 2px solid rgba(218,165,32,0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 100%
+  );
+  transform: rotate(45deg);
+  animation: lightSweep 8s infinite linear;
+  pointer-events: none;
+}
+
+.door-handle {
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 400px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  z-index: 2;
+}
+
+.handle-bar {
+  width: 16px;
+  height: 300px;
+  background: linear-gradient(90deg,
+    #b8860b 0%,
+    #ffd700 30%,
+    #daa520 50%,
+    #ffd700 70%,
+    #b8860b 100%
+  );
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 
+    2px 0 20px rgba(218,165,32,0.3),
+    -2px 0 20px rgba(218,165,32,0.3),
+    0 0 40px rgba(218,165,32,0.2);
+  transition: all 0.3s ease;
+}
+
+.handle-mount {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg,
+    #b8860b 0%,
+    #ffd700 50%,
+    #b8860b 100%
+  );
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 15px rgba(0,0,0,0.4),
+    0 0 20px rgba(218,165,32,0.4);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #daa520;
+  transition: all 0.3s ease;
+}
+
+/* Royal Door Decorative Elements */
+.door-surface .royal-crest {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(45deg, #daa520, #ffd700);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 2px solid #b8860b;
+  box-shadow: 0 0 20px rgba(218,165,32,0.3);
+  z-index: 1;
+}
+
+.door-surface .royal-pattern {
+  position: absolute;
+  top: 240px;
+  bottom: 240px;
+  left: 40px;
+  right: 40px;
+  border: 2px solid rgba(218,165,32,0.3);
+  background-image: 
+    linear-gradient(45deg, rgba(218,165,32,0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(218,165,32,0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(218,165,32,0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(218,165,32,0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  z-index: 1;
+}
+
+/* Door Opening Effects */
+.splash-door.opening .door-surface {
+  box-shadow: 
+    inset 0 0 150px rgba(0,0,0,0.8),
+    0 0 70px rgba(0,0,0,0.9);
+}
+
+.splash-door.opening .royal-crest {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 0 30px rgba(218,165,32,0.4);
+}
+
+.splash-door.opening .royal-pattern {
+  opacity: 0.5;
+}
+
+/* Lighting Effects */
+.ambient-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255,255,255,0.05) 0%,
+    rgba(255,255,255,0.02) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255,255,255,0.03) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: subtle-reflection 10s infinite linear;
+}
+
+@keyframes subtle-reflection {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes lightSweep {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
 }
 

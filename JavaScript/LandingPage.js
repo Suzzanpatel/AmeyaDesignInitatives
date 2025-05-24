@@ -101,6 +101,108 @@ document.addEventListener('DOMContentLoaded', function() {
   startAnimationSequence();
 });
 
+// Door Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const leftDoor = document.querySelector('.splash-door.left');
+    const rightDoor = document.querySelector('.splash-door.right');
+    const splashScreen = document.getElementById('splashScreen');
+    const mainContent = document.querySelector('.main-content');
+    const logoTransition = document.querySelector('.logo-transition');
+    let doorsOpened = false;
+
+    // Function to handle door opening
+    function openDoors() {
+        if (doorsOpened) return;
+        
+        leftDoor.classList.add('opening');
+        rightDoor.classList.add('opening');
+        
+        // Add open class with slight delay for visual effect
+        setTimeout(() => {
+            leftDoor.classList.add('open');
+            rightDoor.classList.add('open');
+        }, 100);
+
+        // Handle transition after doors open
+        setTimeout(() => {
+            splashScreen.classList.add('fade-out');
+            doorsOpened = true;
+
+            // Show logo transition
+            logoTransition.style.opacity = '1';
+            logoTransition.classList.add('visible');
+
+            // Handle logo animation
+            setTimeout(() => {
+                logoTransition.classList.add('fade-out');
+                mainContent.classList.add('visible');
+                
+                // Initialize other animations after content is visible
+                initializePageAnimations();
+            }, 2000);
+        }, 2000);
+    }
+
+    // Add click listeners to door handles
+    const doorHandles = document.querySelectorAll('.door-handle');
+    doorHandles.forEach(handle => {
+        handle.addEventListener('click', openDoors);
+    });
+
+    // Add hover effects
+    const doors = document.querySelectorAll('.splash-door');
+    doors.forEach(door => {
+        door.addEventListener('mouseenter', () => {
+            if (!doorsOpened) {
+                door.querySelector('.door-surface').style.transform = 'scale(0.99)';
+                door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1.1)';
+            }
+        });
+
+        door.addEventListener('mouseleave', () => {
+            if (!doorsOpened) {
+                door.querySelector('.door-surface').style.transform = 'scale(1)';
+                door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1)';
+            }
+        });
+    });
+
+    // Add subtle door movement on mouse move
+    document.addEventListener('mousemove', (e) => {
+        if (doorsOpened) return;
+
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        const leftRotation = (mouseX - 0.5) * 2;
+        const rightRotation = (mouseX - 0.5) * -2;
+        const verticalTilt = (mouseY - 0.5) * 2;
+
+        leftDoor.style.transform = `perspective(2000px) rotateY(${leftRotation}deg) rotateX(${verticalTilt}deg)`;
+        rightDoor.style.transform = `perspective(2000px) rotateY(${rightRotation}deg) rotateX(${verticalTilt}deg)`;
+    });
+
+    // Auto-open doors after a delay if user hasn't interacted
+    const autoOpenTimeout = setTimeout(() => {
+        if (!doorsOpened) {
+            openDoors();
+        }
+    }, 5000);
+
+    // Cancel auto-open if user interacts with the doors
+    doors.forEach(door => {
+        door.addEventListener('mouseenter', () => {
+            clearTimeout(autoOpenTimeout);
+        });
+    });
+});
+
+// Initialize page animations
+function initializePageAnimations() {
+    // Add your existing page animation code here
+    // This function will be called after the doors open and content is visible
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation menu toggle
   const menuIcon = document.querySelector('.menu-icon');
