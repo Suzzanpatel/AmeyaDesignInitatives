@@ -2691,70 +2691,153 @@ html {
 .door-knob-assembly {
   position: absolute;
   top: 50%;
-  width: 120px;
-  height: 180px;
   transform: translateY(-50%);
-  z-index: 3;
+  width: 60px;
+  height: 60px;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.door-knob {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.knob-highlight {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 20%;
+  height: 20%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.door-knob:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #3a3a3a 0%, #222222 100%);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+.door-knob:active {
+  transform: scale(0.95);
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
 }
 
 .splash-door.left .door-knob-assembly {
-  right: 40px;
+  right: 15%;
 }
 
 .splash-door.right .door-knob-assembly {
-  left: 40px;
+  left: 15%;
 }
 
-/* Backplate Styles */
-.door-knob-backplate {
+@media (max-width: 768px) {
+  .door-knob-assembly {
+    width: 40px;
+    height: 40px;
+  }
+
+  .splash-door.left .door-knob-assembly {
+    right: 20%;
+  }
+
+  .splash-door.right .door-knob-assembly {
+    left: 20%;
+  }
+}
+
+@media (max-width: 480px) {
+  .door-knob-assembly {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Royal Door Knob Styles */
+.door-knob-assembly {
   position: absolute;
+  top: 50%;
+  right: 80px;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.door-knob-backplate {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 160px;
   background: linear-gradient(135deg,
-    #704214 0%,
-    #B87333 20%,
-    #DAA520 50%,
-    #B87333 80%,
-    #704214 100%
+    #8b4513 0%,
+    #daa520 25%,
+    #ffd700 50%,
+    #daa520 75%,
+    #8b4513 100%
   );
   border-radius: 10px;
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.6),
-    0 0 15px rgba(0,0,0,0.4);
-  border: 2px solid #8B4513;
-  overflow: hidden;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.5),
+    0 0 15px rgba(218,165,32,0.4);
+  padding: 10px;
+  border: 2px solid #8b4513;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
 }
 
 .backplate-design {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at center, transparent 40%, rgba(139,69,19,0.2) 60%, transparent 70%),
-    repeating-linear-gradient(
-      45deg,
-      transparent 0px,
-      transparent 10px,
-      rgba(218,165,32,0.1) 10px,
-      rgba(218,165,32,0.1) 12px
-    );
-  opacity: 0.5;
-}
-
-.backplate-design::before {
-  content: '';
   position: absolute;
   top: 10px;
   left: 10px;
   right: 10px;
   bottom: 10px;
-  border: 1px solid rgba(218,165,32,0.3);
+  border: 1px solid rgba(139,69,19,0.6);
   border-radius: 6px;
+  background: 
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(139,69,19,0.2) 0deg 10deg,
+      transparent 10deg 30deg
+    );
+  box-shadow: 
+    inset 0 0 10px rgba(218,165,32,0.2),
+    0 0 5px rgba(218,165,32,0.2);
 }
 
-/* Door Knob Styles */
+.backplate-design::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border: 1px solid rgba(139,69,19,0.4);
+  border-radius: 4px;
+  background: 
+    radial-gradient(
+      circle at center,
+      rgba(218,165,32,0.15) 0%,
+      transparent 70%
+    );
+}
+
 .door-knob {
   position: absolute;
   top: 50%;
@@ -2763,141 +2846,136 @@ html {
   width: 60px;
   height: 60px;
   background: linear-gradient(135deg,
-    #B87333 0%,
-    #DAA520 45%,
-    #FFD700 50%,
-    #DAA520 55%,
-    #B87333 100%
+    #8b4513 0%,
+    #daa520 30%,
+    #ffd700 50%,
+    #daa520 70%,
+    #8b4513 100%
   );
   border-radius: 50%;
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.4),
-    0 0 15px rgba(0,0,0,0.3),
-    0 0 30px rgba(218,165,32,0.2);
-  border: 2px solid #8B4513;
+  box-shadow:
+    inset 0 0 15px rgba(0,0,0,0.6),
+    0 0 20px rgba(218,165,32,0.4),
+    0 5px 15px rgba(0,0,0,0.4);
+  border: 2px solid #8b4513;
   cursor: pointer;
+  transform-style: preserve-3d;
   transition: all 0.3s ease;
-}
-
-.door-knob:hover {
-  transform: translate(-50%, -50%) scale(1.05);
-  box-shadow: 
-    inset 0 0 25px rgba(0,0,0,0.4),
-    0 0 20px rgba(0,0,0,0.3),
-    0 0 40px rgba(218,165,32,0.3);
-}
-
-.door-knob:active {
-  transform: translate(-50%, -50%) scale(0.95);
 }
 
 .knob-highlight {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
   width: 20px;
   height: 20px;
   background: radial-gradient(
-    circle at center,
-    rgba(255,255,255,0.9) 0%,
-    rgba(255,255,255,0.5) 30%,
+    circle at 30% 30%,
+    rgba(255,255,255,0.8) 0%,
+    rgba(255,255,255,0.3) 40%,
     transparent 70%
   );
   border-radius: 50%;
-  pointer-events: none;
+  opacity: 0.7;
 }
 
-/* Keyhole Styles */
 .keyhole {
   position: absolute;
   top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 14px;
-  height: 24px;
-  background: #1a0f0a;
-  border-radius: 7px;
-  box-shadow: 
-    inset 0 0 5px rgba(0,0,0,0.8),
-    0 0 5px rgba(0,0,0,0.4);
-}
-
-.keyhole::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: #000;
-  border-radius: 50%;
-  box-shadow: inset 0 0 3px rgba(255,255,255,0.1);
+  width: 20px;
+  height: 30px;
+  background: #111;
+  border-radius: 50% 50% 5px 5px;
+  box-shadow:
+    inset 0 0 5px rgba(255,255,255,0.1),
+    0 0 5px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
 
 .keyhole-shine {
   position: absolute;
   top: 2px;
-  left: 2px;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255,255,255,0.4) 0%,
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.3) 0%,
     transparent 100%
   );
-  border-radius: 50%;
-  pointer-events: none;
+  border-radius: 3px;
 }
 
-/* Mobile Optimization */
+/* Door Knob Hover Effects */
+.door-knob:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.6),
+    0 0 25px rgba(218,165,32,0.6),
+    0 8px 20px rgba(0,0,0,0.4);
+}
+
+.door-knob:hover ~ .keyhole {
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.2),
+    0 0 8px rgba(218,165,32,0.3);
+}
+
+.door-knob:active {
+  transform: translate(-50%, -50%) scale(0.95);
+  box-shadow:
+    inset 0 0 25px rgba(0,0,0,0.7),
+    0 0 15px rgba(218,165,32,0.3),
+    0 3px 10px rgba(0,0,0,0.4);
+}
+
+/* Mobile Optimization for Door Knob */
 @media (max-width: 768px) {
   .door-knob-assembly {
-    width: 100px;
-    height: 150px;
+    right: 40px;
+    width: 90px;
+    height: 140px;
   }
 
-  .door-knob {
-    width: 50px;
-    height: 50px;
-  }
-
-  .keyhole {
-    width: 12px;
-    height: 20px;
-  }
-
-  .splash-door.left .door-knob-assembly {
-    right: 30px;
-  }
-
-  .splash-door.right .door-knob-assembly {
-    left: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .door-knob-assembly {
-    width: 80px;
+  .door-knob-backplate {
     height: 120px;
   }
 
   .door-knob {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .knob-highlight {
+    top: 6px;
+    left: 6px;
+    width: 15px;
+    height: 15px;
   }
 
   .keyhole {
-    width: 10px;
-    height: 16px;
+    width: 15px;
+    height: 22px;
   }
 
-  .splash-door.left .door-knob-assembly {
-    right: 20px;
+  .keyhole-shine {
+    width: 4px;
+    height: 8px;
   }
+}
 
+/* Right Door Knob Position */
+.splash-door.right .door-knob-assembly {
+  right: auto;
+  left: 80px;
+}
+
+@media (max-width: 768px) {
   .splash-door.right .door-knob-assembly {
-    left: 20px;
+    left: 40px;
   }
 }
 
