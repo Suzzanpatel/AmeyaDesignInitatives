@@ -1,3 +1,106 @@
+// Splash Screen Animation
+document.addEventListener('DOMContentLoaded', function() {
+  const splashScreen = document.getElementById('splashScreen');
+  const leftDoor = document.querySelector('.splash-door.left');
+  const rightDoor = document.querySelector('.splash-door.right');
+  const mainContent = document.querySelector('.main-content');
+  const logoTransition = document.querySelector('.logo-transition');
+  
+  // Get all sections for reveal animation
+  const sections = document.querySelectorAll('.welcome-section, .expertise-section, .projects-section, .testimonials-section, .awards-container, .ethos-section');
+
+  // Function to handle section reveal on scroll
+  function revealSection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        
+        // Reveal child elements with staggered animation
+        const childElements = entry.target.querySelectorAll('.expertise-box, .project-card, .testimonial, .award-card');
+        childElements.forEach((element, index) => {
+          setTimeout(() => {
+            element.classList.add('reveal');
+          }, index * 100); // 100ms delay between each element
+        });
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  }
+
+  // Create the intersection observer with smoother threshold
+  const sectionObserver = new IntersectionObserver(revealSection, {
+    threshold: 0.2, // Trigger when 20% of the section is visible
+    rootMargin: '0px 0px -10% 0px' // Slightly offset the trigger point
+  });
+
+  // Function to start observing sections
+  function startSectionObservers() {
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+  }
+
+  // Function to start the animation sequence
+  function startAnimationSequence() {
+    // Step 1: Initial delay before door animation
+    setTimeout(() => {
+      // Add smooth opening animation to doors
+      const leftDoor = document.querySelector('.splash-door.left');
+      const rightDoor = document.querySelector('.splash-door.right');
+      
+      leftDoor.style.transition = 'transform 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      rightDoor.style.transition = 'transform 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      
+      leftDoor.classList.add('open');
+      rightDoor.classList.add('open');
+      
+      // Step 2: Fade out splash screen and show logo with smooth transition
+      setTimeout(() => {
+        const splashScreen = document.getElementById('splashScreen');
+        const logoTransition = document.querySelector('.logo-transition');
+        
+        splashScreen.style.transition = 'opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)';
+        splashScreen.classList.add('fade-out');
+        
+        logoTransition.style.transition = 'opacity 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)';
+        logoTransition.classList.add('visible');
+        
+        // Step 3: Smooth transition to main content
+        setTimeout(() => {
+          logoTransition.classList.add('fade-out');
+          const mainContent = document.querySelector('.main-content');
+          mainContent.classList.add('visible');
+          
+          // Start observing sections after main content is visible
+          setTimeout(() => {
+            startSectionObservers();
+            
+            // Add smooth reveal to initial viewport sections
+            const initialSections = document.querySelectorAll('.welcome-section, .expertise-section');
+            initialSections.forEach(section => {
+              if (isElementInViewport(section)) {
+                section.classList.add('reveal');
+                
+                // Reveal child elements
+                const childElements = section.querySelectorAll('.expertise-box, .project-card');
+                childElements.forEach((element, index) => {
+                  setTimeout(() => {
+                    element.classList.add('reveal');
+                  }, index * 100);
+                });
+              }
+            });
+          }, 600);
+        }, 2000); // Duration for logo display
+      }, 1200); // Reduced time between door opening and logo appearance
+    }, 400); // Initial delay
+  }
+
+  // Start the animation sequence
+  startAnimationSequence();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation menu toggle
   const menuIcon = document.querySelector('.menu-icon');

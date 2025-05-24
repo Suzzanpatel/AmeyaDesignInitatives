@@ -1037,6 +1037,31 @@ a:hover {
   transform: scale(1.2);
 }
 
+/* Responsive styles */
+@media screen and (max-width: 1200px) {
+  .image-slider {
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .image-slider {
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .image-slider {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .image-slider {
+    height: 250px;
+  }
+}
+
 /* Contact Button */
 .contact-btn-container {
   margin-top: 2rem;
@@ -1844,5 +1869,470 @@ html, body {
     height: 36px;
     font-size: 1rem;
   }
+}
+
+/* Splash Screen Styles */
+#splashScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px;
+  transition: opacity 0.5s ease-out;
+}
+
+.splash-door-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+}
+
+.splash-door {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: #111;
+  transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.door-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(30,30,30,1) 0%,
+    rgba(40,40,40,1) 50%,
+    rgba(25,25,25,1) 100%
+  );
+  box-shadow: 
+    inset 0 0 100px rgba(0,0,0,0.5),
+    0 0 50px rgba(0,0,0,0.8);
+}
+
+.door-glass {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  width: 70%;
+  left: 15%;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 
+    0 0 30px rgba(255,255,255,0.05),
+    inset 0 0 20px rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  transition: all 0.3s ease;
+}
+
+.glass-panel {
+  flex: 1;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0.05) 50%,
+    rgba(255,255,255,0.02) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255,255,255,0.1) 50%,
+    transparent 100%
+  );
+  transform: rotate(45deg);
+  animation: lightSweep 5s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes lightSweep {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.door-handle {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 400px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.handle-bar {
+  width: 12px;
+  height: 280px;
+  background: linear-gradient(90deg,
+    #b8860b 0%,
+    #daa520 50%,
+    #b8860b 100%
+  );
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 
+    2px 0 15px rgba(218,165,32,0.2),
+    -2px 0 15px rgba(218,165,32,0.2),
+    0 0 30px rgba(218,165,32,0.1);
+}
+
+.handle-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0.3) 50%,
+    rgba(255,255,255,0.1) 100%
+  );
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.handle-mount {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg,
+    #b8860b 0%,
+    #daa520 50%,
+    #b8860b 100%
+  );
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 10px rgba(0,0,0,0.3),
+    0 0 15px rgba(218,165,32,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.handle-mount::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    transparent 0%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.handle-bar:hover {
+  background: linear-gradient(90deg,
+    #daa520 0%,
+    #ffd700 50%,
+    #daa520 100%
+  );
+  box-shadow: 
+    2px 0 20px rgba(218,165,32,0.3),
+    -2px 0 20px rgba(218,165,32,0.3),
+    0 0 40px rgba(218,165,32,0.2);
+  transition: all 0.3s ease;
+}
+
+.handle-mount:hover {
+  background: linear-gradient(135deg,
+    #daa520 0%,
+    #ffd700 50%,
+    #daa520 100%
+  );
+  box-shadow: 
+    inset 0 0 15px rgba(0,0,0,0.3),
+    0 0 20px rgba(218,165,32,0.4);
+  transition: all 0.3s ease;
+}
+
+.door-edge {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg,
+    #202020 0%,
+    #252525 50%,
+    #202020 100%
+  );
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.5),
+    0 0 10px rgba(0,0,0,0.5);
+}
+
+.edge-detail {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+}
+
+.splash-door.left {
+  left: 0;
+  transform-origin: left;
+}
+
+.splash-door.right {
+  right: 0;
+  transform-origin: right;
+}
+
+.splash-door.left .door-handle {
+  right: 40px;
+}
+
+.splash-door.right .door-handle {
+  left: 40px;
+}
+
+.splash-door.left .door-edge {
+  right: 0;
+}
+
+.splash-door.right .door-edge {
+  left: 0;
+}
+
+.splash-door.left.open {
+  transform: perspective(2000px) rotateY(-105deg);
+}
+
+.splash-door.right.open {
+  transform: perspective(2000px) rotateY(105deg);
+}
+
+.ambient-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255,255,255,0.03) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255,255,255,0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.splash-door:hover .glass-panel {
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 100%
+  );
+}
+
+#splashScreen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main Content Transitions */
+.main-content {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 
+    opacity 1.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+    transform 1.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.main-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.welcome-section,
+.expertise-section,
+.projects-section,
+.testimonials-section,
+.awards-container,
+.ethos-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 
+    opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1),
+    transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.welcome-section.reveal,
+.expertise-section.reveal,
+.projects-section.reveal,
+.testimonials-section.reveal,
+.awards-container.reveal,
+.ethos-section.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth reveal for child elements */
+.expertise-box,
+.project-card,
+.testimonial,
+.award-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 
+    opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
+    transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+.expertise-box.reveal,
+.project-card.reveal,
+.testimonial.reveal,
+.award-card.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for smoother group animations */
+.expertise-box:nth-child(1) { transition-delay: 0.1s; }
+.expertise-box:nth-child(2) { transition-delay: 0.2s; }
+.expertise-box:nth-child(3) { transition-delay: 0.3s; }
+
+.project-card:nth-child(1) { transition-delay: 0.1s; }
+.project-card:nth-child(2) { transition-delay: 0.2s; }
+.project-card:nth-child(3) { transition-delay: 0.3s; }
+.project-card:nth-child(4) { transition-delay: 0.4s; }
+.project-card:nth-child(5) { transition-delay: 0.5s; }
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Logo Transition Styles */
+.logo-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 9998;
+}
+
+.logo-container {
+  text-align: center;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 4px;
+  position: relative;
+}
+
+.logo-text::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #daa520;
+  transition: width 1s ease;
+}
+
+.tagline {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5rem;
+  color: #daa520;
+  margin-top: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+.logo-transition.visible {
+  opacity: 1;
+}
+
+.logo-transition.visible .logo-container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.logo-transition.visible .logo-text::after {
+  width: 100%;
+}
+
+.logo-transition.visible .tagline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logo-transition.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 

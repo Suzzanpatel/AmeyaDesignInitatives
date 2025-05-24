@@ -5,97 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ameya Design Initiatives</title>
   <link rel="stylesheet" href="/css/LandingPage.css" />
-  <style>
-    /* Splash Screen Styles */
-    #splashScreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1a1a1a;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1500px;
-      transition: opacity 0.5s ease-out;
-    }
-
-    .splash-door-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-    }
-
-    .splash-door {
-      width: 50%;
-      height: 100%;
-      position: absolute;
-      background-image: url('/Assets/HomePage/splash-door.jpg');
-      background-size: 200% 100%;
-      background-repeat: no-repeat;
-      transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-origin: left;
-      transform-style: preserve-3d;
-    }
-
-    .splash-door.left {
-      left: 0;
-      background-position: left;
-      transform-origin: left;
-    }
-
-    .splash-door.right {
-      right: 0;
-      background-position: right;
-      transform-origin: right;
-    }
-
-    .splash-door.left.open {
-      transform: perspective(1500px) rotateY(-105deg);
-    }
-
-    .splash-door.right.open {
-      transform: perspective(1500px) rotateY(105deg);
-    }
-
-    #splashScreen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Hide main content initially */
-    .main-content {
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-
-    .main-content.visible {
-      opacity: 1;
-    }
-
-    /* Optional: Add some depth to the doors */
-    .splash-door::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.1) 100%);
-      pointer-events: none;
-    }
-  </style>
   <script src="/JavaScript/LandingPage.js" defer></script>
 </head>
 <body>
   <!-- Splash Screen -->
   <div id="splashScreen">
     <div class="splash-door-container">
-      <div class="splash-door left"></div>
-      <div class="splash-door right"></div>
+      <div class="splash-door left">
+        <div class="door-surface"></div>
+        <div class="door-glass">
+          <div class="glass-panel"></div>
+          <div class="glass-panel"></div>
+          <div class="glass-panel"></div>
+        </div>
+        <div class="door-handle">
+          <div class="handle-mount"></div>
+          <div class="handle-bar"></div>
+          <div class="handle-mount"></div>
+        </div>
+        <div class="door-edge">
+          <div class="edge-detail"></div>
+        </div>
+        <div class="ambient-light"></div>
+        <div class="reflection"></div>
+      </div>
+      <div class="splash-door right">
+        <div class="door-surface"></div>
+        <div class="door-glass">
+          <div class="glass-panel"></div>
+          <div class="glass-panel"></div>
+          <div class="glass-panel"></div>
+        </div>
+        <div class="door-handle">
+          <div class="handle-mount"></div>
+          <div class="handle-bar"></div>
+          <div class="handle-mount"></div>
+        </div>
+        <div class="door-edge">
+          <div class="edge-detail"></div>
+        </div>
+        <div class="ambient-light"></div>
+        <div class="reflection"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo Transition -->
+  <div class="logo-transition">
+    <div class="logo-container">
+      <h1 class="logo-text">AMEYA DESIGN</h1>
+      <p class="tagline">For design it is ADi</p>
     </div>
   </div>
 
@@ -351,35 +310,5 @@
       </div>
     </footer>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const splashScreen = document.getElementById('splashScreen');
-      const leftDoor = document.querySelector('.splash-door.left');
-      const rightDoor = document.querySelector('.splash-door.right');
-      const mainContent = document.querySelector('.main-content');
-
-      // Ensure the splash screen and doors are present
-      if (!splashScreen || !leftDoor || !rightDoor || !mainContent) {
-        console.error('Required elements not found');
-        return;
-      }
-
-      // Function to open doors
-      function openDoors() {
-        leftDoor.classList.add('open');
-        rightDoor.classList.add('open');
-        
-        // After door animation (2.5s) + small buffer
-        setTimeout(() => {
-          splashScreen.classList.add('fade-out');
-          mainContent.classList.add('visible');
-        }, 3000);
-      }
-
-      // Start the door opening animation after a short delay
-      setTimeout(openDoors, 500);
-    });
-  </script>
 </body>
 </html>
