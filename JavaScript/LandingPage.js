@@ -167,9 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
     leftDoor.classList.add('opening');
     rightDoor.classList.add('opening');
     
-    // Set transition with smoother timing
-    leftDoor.style.transition = 'transform 4s cubic-bezier(0.22, 1, 0.36, 1)';
-    rightDoor.style.transition = 'transform 4s cubic-bezier(0.22, 1, 0.36, 1)';
+    // Set transition with smoother timing - reduced from 4s to 3s
+    leftDoor.style.transition = 'transform 3s cubic-bezier(0.22, 1, 0.36, 1)';
+    rightDoor.style.transition = 'transform 3s cubic-bezier(0.22, 1, 0.36, 1)';
     
     // Force a reflow to ensure the transition works
     leftDoor.offsetHeight;
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
       rightDoor.classList.add('open');
       doorsOpened = true;
 
-      // Fade out splash screen after doors open
+      // Fade out splash screen after doors open - reduced from 4000ms to 2500ms
       setTimeout(() => {
         splashScreen.classList.add('fade-out');
         
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         logoContainer.style.transform = 'scale(1)';
         logoContainer.style.opacity = '1';
 
-        // Hide logo and show main content
+        // Hide logo and show main content - reduced from 3000ms to 2000ms
         setTimeout(() => {
           logoTransition.classList.add('fade-out');
           mainContent.classList.add('visible');
@@ -213,8 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
           }, 1000);
-        }, 3000); // Longer logo display duration
-      }, 4000); // Increased delay to match door animation
+        }, 2000);
+      }, 2500);
     }, 100);
   }
 
@@ -274,12 +274,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Trigger automatic door opening with longer initial delay
+  // Trigger automatic door opening with adjusted initial delay - reduced from 2500ms to 2000ms
   setTimeout(() => {
     if (!doorsOpened) {
       openDoors();
     }
-  }, 2500);
+  }, 2000);
 });
 
 // Initialize page animations

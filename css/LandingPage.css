@@ -1920,24 +1920,24 @@ html, body {
   left: 0;
   transform-origin: left center;
   transform: perspective(2000px) rotateY(0deg);
-  transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .splash-door.right {
   right: 0;
   transform-origin: right center;
   transform: perspective(2000px) rotateY(0deg);
-  transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .splash-door.left.open {
   transform: perspective(2000px) rotateY(-105deg);
-  transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .splash-door.right.open {
   transform: perspective(2000px) rotateY(105deg);
-  transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Door Opening Animation */
@@ -1971,17 +1971,17 @@ html, body {
 
   .splash-door.left {
     transform: perspective(3000px) rotateY(0deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .splash-door.right {
     transform: perspective(3000px) rotateY(0deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .splash-door.left.open {
     transform: perspective(3000px) rotateY(-105deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .splash-door.right.open {
