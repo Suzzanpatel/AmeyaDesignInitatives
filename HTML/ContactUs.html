@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ameya Design Initiatives</title>
+    <link rel="stylesheet" href="../css/ContactUs.css">
+    <link rel="stylesheet" href="../css/LandingPage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo">Ameya Design</div>
+        <nav class="nav-links">
+            <a href="LandingPage.html">Home</a>
+            <div class="nav-item">
+                <a href="#Architecture">Architecture <span class="dropdown-indicator">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="All_ArchitectureProjects.html">All</a>
+                    <a href="#Architecture/Residential">Residential</a>
+                    <a href="#Architecture/Commercial">Commercial</a>
+                    <a href="#Architecture/Consultation">Consultation</a>
+                </div>
+            </div>
+            <a href="#Interior">Interior</a>
+            <a href="#Awards and Views">Awards and Views</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+        </nav>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <div class="contact-hero">
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="page-title">
+            <h1>Contact Us</h1>
+            <div class="title-decoration"></div>
+            <p class="subtitle">Let's Create Something Beautiful Together</p>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="info-section">
+                    <h2>Get in Touch</h2>
+                    <p>We'd love to hear from you. Whether you have a question about our services, projects, or anything else, our team is ready to answer all your questions.</p>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Location</h3>
+                                <p>123 Design Street, Creative District<br>Mumbai, Maharashtra 400001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+91 (22) 1234-5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@ameyainitiatives.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <label for="email">Your Email</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder=" ">
+                        <label for="phone">Phone Number (Optional)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select Subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="project">Project Discussion</option>
+                            <option value="collaboration">Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="message" name="message" required placeholder=" "></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JavaScript/ContactUs.js"></script>
+    <script src="../JavaScript/LandingPage.js"></script>
+</body>
+</html>
