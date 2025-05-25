@@ -49,13 +49,13 @@
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .projects-container {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 700px;
     margin-bottom: 4rem;
 }
 
@@ -71,6 +71,7 @@
     gap: 2rem;
     padding: 1rem;
     transition: none;
+    overflow: hidden; /* Prevent content from spilling out */
 }
 
 .project-slide.active {
@@ -78,6 +79,10 @@
     visibility: visible;
     transform: translateX(0);
     transition: none;
+}
+
+.project-slide:not(.active) {
+    display: none; /* Hide inactive slides completely */
 }
 
 /* Project Image */
@@ -105,13 +110,13 @@
     color: #fff;
     display: flex;
     flex-direction: column;
+    min-height: 0; /* Prevents content overflow */
+    justify-content: space-between;
+    align-items: center;
     gap: 1.5rem;
     position: relative;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    height: auto;
     overflow-y: auto;
-    max-height: 100%;
 }
 
 /* Project Header */
@@ -139,6 +144,7 @@
 .project-description {
     flex: 0 1 auto;
     overflow-y: auto;
+    max-height: 40vh; /* Limit description height on small screens */
 }
 
 .project-description p {
@@ -178,21 +184,26 @@
     margin-top: 0.5rem;
 }
 
-/* Button Container */
-.button-container {
-    margin-top: auto;
-    padding-top: 1rem;
-    flex: 0 0 auto;
+/* Button Wrapper */
+.button-wrapper {
+    position: relative; /* Changed from sticky */
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    z-index: 5;
+    background: rgba(26, 26, 26, 0.95); /* Match parent background */
 }
 
 /* View Project Button */
 .view-project-btn {
     display: inline-block;
-    width: fit-content;
+    width: auto;
+    min-width: 200px;
     padding: 1rem 2.5rem;
-    background: transparent;
+    background: #ffcc70;
     border: 2px solid #ffcc70;
-    color: #ffcc70;
+    color: #000;
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 600;
@@ -200,90 +211,87 @@
     text-transform: uppercase;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(255, 204, 112, 0.2);
-    cursor: pointer;
+    margin: 0 auto;
     position: relative;
-    z-index: 2;
-}
-
-.view-project-btn:hover {
-    background: #ffcc70;
-    color: #000;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 204, 112, 0.4);
+    z-index: 5;
 }
 
 /* Navigation Controls */
 .project-controls {
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 2rem;
     left: 0;
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem;
-    z-index: 10;
-    pointer-events: none;
+    padding: 0;
+    z-index: 20;
+    max-width: 95%;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .prev-project,
 .next-project {
-    background: none;
-    border: none;
+    width: 40px;
+    height: 40px;
+    background: rgba(17, 17, 17, 0.9);
+    border: 2px solid #ffcc70;
     color: #ffcc70;
-    font-size: 3rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    opacity: 0.7;
     pointer-events: auto;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding: 1rem;
-    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific positioning for arrows */
+.prev-project {
+    margin-left: 1rem;
+}
+
+.next-project {
+    margin-right: 1rem;
 }
 
 .prev-project:hover,
 .next-project:hover {
-    opacity: 1;
-    color: #fff;
+    background: #ffcc70;
+    color: #111;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 204, 112, 0.3);
 }
 
-/* Project Dots */
+/* Project dots positioning adjusted for arrows */
 .project-dots {
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 2.2rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 0.8rem;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.3);
+    z-index: 15;
+    background: rgba(17, 17, 17, 0.9);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    backdrop-filter: blur(5px);
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 204, 112, 0.3);
-    cursor: pointer;
-}
-
-.dot.active {
-    background: #ffcc70;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 992px) {
     .projects-container {
         height: auto;
-        min-height: 800px;
+        min-height: 1000px;
     }
 
     .project-slide {
         flex-direction: column;
         height: auto;
-        min-height: 800px;
+        min-height: 1000px;
         padding: 1rem;
         gap: 2rem;
     }
@@ -308,29 +316,38 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .button-container {
-        text-align: center;
-        padding-top: 2rem;
+    .button-wrapper {
+        margin-top: 1.5rem;
+        padding-bottom: 2rem;
     }
 
     .view-project-btn {
-        width: auto;
-        min-width: 200px;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .project-controls {
+        bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .project-dots {
+        bottom: 2rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     .projects-showcase {
         padding: 1rem;
-        min-height: 900px;
+        min-height: 1100px;
     }
 
     .projects-container {
-        min-height: 850px;
+        min-height: 1050px;
     }
 
     .project-slide {
-        min-height: 850px;
+        min-height: 1050px;
     }
 
     .project-image {
@@ -347,16 +364,26 @@
 
     .prev-project,
     .next-project {
-        font-size: 2.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
     }
 
-    .button-container {
-        padding-top: 1.5rem;
+    .project-controls {
+        max-width: 90%;
+        bottom: 1.5rem;
     }
 
-    .view-project-btn {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
+    .prev-project {
+        margin-left: 0.5rem;
+    }
+
+    .next-project {
+        margin-right: 0.5rem;
+    }
+
+    .project-dots {
+        bottom: 1.7rem;
     }
 }
 
@@ -398,14 +425,16 @@
         margin-bottom: 1rem;
     }
 
-    .button-container {
-        padding-top: 1rem;
+    .button-wrapper {
+        margin-top: 1rem;
+        padding-bottom: 4rem;
     }
 
     .view-project-btn {
         width: 100%;
-        padding: 0.8rem 1.5rem;
+        padding: 0.8rem 1rem;
         font-size: 0.9rem;
+        min-width: unset;
     }
 
     .prev-project,
@@ -422,4 +451,84 @@
         width: 6px;
         height: 6px;
     }
-} 
+}
+
+/* iPhone and similar sized devices */
+@media screen and (max-width: 428px) {
+    .projects-showcase {
+        padding: 0.5rem;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .projects-container {
+        position: relative;
+        height: auto;
+        min-height: calc(100vh - 100px); /* Account for navigation */
+    }
+
+    .project-slide {
+        position: relative; /* Changed from absolute */
+        height: auto;
+        transform: none;
+        padding: 0.5rem;
+    }
+
+    .project-slide.active {
+        transform: none;
+    }
+
+    .project-image {
+        height: 200px;
+        margin-bottom: 1rem;
+    }
+
+    .project-content {
+        max-height: none;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .project-description {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .project-specs {
+        margin-bottom: 1.5rem;
+    }
+
+    .button-wrapper {
+        position: relative;
+        bottom: auto;
+        margin-top: 1rem;
+        padding: 1rem 0 3rem;
+        background: transparent;
+    }
+
+    .view-project-btn {
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .project-controls {
+        max-width: 85%;
+        bottom: 1.2rem;
+        padding: 0 0.8rem;
+    }
+
+    .prev-project,
+    .next-project {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+    }
+
+    .project-dots {
+        bottom: 1.5rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
