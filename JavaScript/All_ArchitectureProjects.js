@@ -1,4 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Navigation
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Toggle menu on hamburger click
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        // Toggle between ☰ and ✕ icons
+        menuIcon.textContent = menuIcon.textContent === '☰' ? '✕' : '☰';
+    });
+
+    // Handle dropdown toggles on mobile
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                // Remove active class from other items
+                navItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                item.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !menuIcon.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            menuIcon.textContent = '☰';
+        }
+    });
+
+    // Close menu when window is resized above mobile breakpoint
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navLinks.classList.remove('active');
+            menuIcon.textContent = '☰';
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+    });
+
     const slides = document.querySelectorAll('.project-slide');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.prev-project');
