@@ -202,4 +202,58 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize first slide
     slides[0].classList.add('active');
     dots[0].classList.add('active');
+
+    // Variables for navbar scroll behavior
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+    const mobileBreakpoint = 768;
+
+    // Function to handle navbar visibility on scroll
+    function handleNavbarScroll() {
+        if (window.innerWidth <= mobileBreakpoint) {
+            navbar.classList.remove('hidden');
+            return;
+        }
+
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Show navbar at the very top of the page
+        if (currentScroll <= 0) {
+            navbar.classList.remove('hidden');
+            return;
+        }
+
+        // Hide navbar when scrolling down, show when scrolling up
+        if (currentScroll > lastScrollTop) {
+            // Scrolling down
+            navbar.classList.add('hidden');
+        } else {
+            // Scrolling up
+            navbar.classList.remove('hidden');
+        }
+
+        lastScrollTop = currentScroll;
+    }
+
+    // Add scroll event listener with throttling for better performance
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleNavbarScroll();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= mobileBreakpoint) {
+            navbar.classList.remove('hidden');
+        }
+    });
+
+    // Initialize navbar state
+    handleNavbarScroll();
 }); 
