@@ -110,7 +110,7 @@ body {
 
 /* Contact Container */
 .contact-container {
-    position: relative;
+    position: center;
     padding: 2rem 0;
     background: var(--background-color);
 }

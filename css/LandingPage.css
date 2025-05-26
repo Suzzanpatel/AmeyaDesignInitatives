@@ -6,9 +6,9 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  background-color: #000; /* Set black background */
+  background-color: #000;
   color: #fff; 
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
   width: 100%;
   position: relative;
 }
@@ -1871,480 +1871,74 @@ html, body {
   }
 }
 
-/* Splash Screen Styles */
-#splashScreen {
+/* Logo Transition */
+.logo-transition {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: #000;
-  z-index: 9999;
+  height: 100vh;
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 2000px;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-  overflow: hidden;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-#splashScreen.fade-out {
+.logo-transition.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.logo-transition.fade-out {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: -1;
 }
 
-.splash-door-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  perspective: 2000px;
-  transform-style: preserve-3d;
+.logo-container {
+  text-align: center;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
 }
 
-.splash-door {
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  background: #111;
-  transform-style: preserve-3d;
-  overflow: hidden;
-  cursor: pointer;
-  will-change: transform;
-  backface-visibility: hidden;
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.2em;
 }
 
-.splash-door.left {
-  left: 0;
-  transform-origin: left center;
-  transform: perspective(2000px) rotateY(0deg);
-  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
+.tagline {
+  font-size: 1.2rem;
+  color: #ffcc70;
+  margin-top: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 300;
 }
 
-.splash-door.right {
-  right: 0;
-  transform-origin: right center;
-  transform: perspective(2000px) rotateY(0deg);
-  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.splash-door.left.open {
-  transform: perspective(2000px) rotateY(-105deg);
-  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.splash-door.right.open {
-  transform: perspective(2000px) rotateY(105deg);
-  transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Door Opening Animation */
-.splash-door.opening {
-  animation: none;
-}
-
-/* Ensure 3D rendering */
-.splash-door * {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-/* Door Content Container */
-.door-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-/* Laptop-specific adjustments */
-@media (min-width: 769px) and (max-width: 1366px) {
-  #splashScreen {
-    perspective: 3000px;
-  }
-
-  .splash-door-container {
-    perspective: 3000px;
-  }
-
-  .splash-door.left {
-    transform: perspective(3000px) rotateY(0deg);
-    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.right {
-    transform: perspective(3000px) rotateY(0deg);
-    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.left.open {
-    transform: perspective(3000px) rotateY(-105deg);
-    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.right.open {
-    transform: perspective(3000px) rotateY(105deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-}
-
-/* Larger screens */
-@media (min-width: 1367px) {
-  #splashScreen {
-    perspective: 4000px;
-  }
-
-  .splash-door-container {
-    perspective: 4000px;
-  }
-
-  .splash-door.left {
-    transform: perspective(4000px) rotateY(0deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.right {
-    transform: perspective(4000px) rotateY(0deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.left.open {
-    transform: perspective(4000px) rotateY(-105deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .splash-door.right.open {
-    transform: perspective(4000px) rotateY(105deg);
-    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-}
-
-/* Door Handle Positioning */
-.splash-door.left .door-handle {
-  right: 40px;
-}
-
-.splash-door.right .door-handle {
-  left: 40px;
-}
-
-/* Door Edge Positioning */
-.splash-door.left .door-edge {
-  right: 0;
-}
-
-.splash-door.right .door-edge {
-  left: 0;
-}
-
-/* Interactive Elements */
-.handle-bar {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.handle-bar:hover {
-  background: linear-gradient(90deg,
-    #daa520 0%,
-    #ffd700 50%,
-    #daa520 100%
-  );
-  box-shadow: 
-    2px 0 25px rgba(218,165,32,0.4),
-    -2px 0 25px rgba(218,165,32,0.4),
-    0 0 50px rgba(218,165,32,0.3);
-  transform: scale(1.05);
-}
-
-.handle-mount:hover {
-  background: linear-gradient(135deg,
-    #daa520 0%,
-    #ffd700 50%,
-    #daa520 100%
-  );
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.4),
-    0 0 30px rgba(218,165,32,0.5);
-  transform: scale(1.1);
-  transition: all 0.3s ease;
-}
-
-/* Door Opening Animation */
-@keyframes doorOpen {
-  from {
-    transform: perspective(2000px) rotateY(0deg);
-  }
-  to {
-    transform: perspective(2000px) rotateY(-105deg);
-  }
-}
-
-@keyframes doorOpenRight {
-  from {
-    transform: perspective(2000px) rotateY(0deg);
-  }
-  to {
-    transform: perspective(2000px) rotateY(105deg);
-  }
-}
-
-/* Enhanced 3D Effects */
-.splash-door::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.2) 0%,
-    transparent 20%,
-    transparent 80%,
-    rgba(0,0,0,0.2) 100%
-  );
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.splash-door.open::before {
-  opacity: 0.8;
-}
-
-/* Door Opening Transition Effects */
-.splash-door.opening .door-surface::before {
-  box-shadow: 
-    inset 0 0 50px rgba(0,0,0,0.8),
-    0 0 70px rgba(0,0,0,0.9);
-  transition: box-shadow 0.5s ease;
-}
-
-.splash-door.opening .glass-panel {
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.25) 0%,
-    rgba(255,255,255,0.15) 50%,
-    rgba(255,255,255,0.1) 100%
-  );
-  transition: all 0.5s ease;
-}
-
-/* Performance Optimization */
-.splash-door {
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
-
-/* Accessibility */
-.door-handle {
-  cursor: pointer;
-}
-
-.door-handle:focus {
-  outline: none;
-  box-shadow: 
-    0 0 0 3px rgba(218,165,32,0.5),
-    0 0 20px rgba(218,165,32,0.3);
-}
-
-/* Mobile Optimization */
-@media (max-width: 768px) {
-  .splash-door {
-    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .splash-door.left.open {
-    transform: perspective(1500px) rotateY(-95deg);
-  }
-  
-  .splash-door.right.open {
-    transform: perspective(1500px) rotateY(95deg);
-  }
-
-  .door-surface {
-    border-width: 4px;
-  }
-
-  .door-surface::before {
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border-width: 1px;
-  }
-
-  .door-glass {
-    top: 40px;
-    bottom: 40px;
-    width: 70%;
-    left: 15%;
-  }
-
-  .door-handle {
-    width: 60px;
-    height: 300px;
-  }
-
-  .handle-bar {
-    width: 12px;
-    height: 200px;
-  }
-
-  .handle-mount {
-    width: 30px;
-    height: 30px;
-  }
-
-  /* Improve touch targets for mobile */
-  .door-handle {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .handle-mount, .handle-bar {
-    position: relative;
-    z-index: 10;
-  }
-
-  /* Add visual feedback for touch */
-  .door-handle:active .handle-mount {
-    transform: scale(0.95);
-    background: linear-gradient(135deg,
-      #ffd700 0%,
-      #daa520 50%,
-      #b8860b 100%
-    );
-  }
-
-  .door-handle:active .handle-bar {
-    background: linear-gradient(90deg,
-      #ffd700 0%,
-      #daa520 50%,
-      #b8860b 100%
-    );
-  }
-
-  /* Optimize door pattern for mobile */
-  .door-surface::after {
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    background-image: 
-      repeating-linear-gradient(45deg,
-        transparent,
-        transparent 5px,
-        rgba(218,165,32,0.1) 5px,
-        rgba(218,165,32,0.1) 10px
-      );
-  }
-
-  /* Improve mobile performance */
-  .splash-door {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-
-  /* Enhance mobile shadows and lighting */
-  .door-surface {
-    box-shadow: 
-      inset 0 0 50px rgba(0,0,0,0.5),
-      0 0 25px rgba(0,0,0,0.6);
-  }
-
-  .ambient-light {
-    opacity: 0.7;
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255,255,255,0.1) 0%,
-      rgba(255,255,255,0.05) 30%,
-      transparent 70%
-    );
-  }
-
-  /* Smoother mobile animations */
-  .splash-door.opening {
-    animation: none;
-  }
-
-  .splash-door.left.open,
-  .splash-door.right.open {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-}
-
-/* Additional mobile optimizations for smaller screens */
-@media (max-width: 480px) {
-  .door-glass {
-    top: 30px;
-    bottom: 30px;
-    width: 75%;
-    left: 12.5%;
-  }
-
-  .door-handle {
-    width: 50px;
-    height: 250px;
-  }
-
-  .handle-bar {
-    width: 10px;
-    height: 160px;
-  }
-
-  .handle-mount {
-    width: 25px;
-    height: 25px;
-  }
-
-  .door-surface::before {
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-  }
-}
-
-/* Ensure proper stacking on mobile */
-@media (max-width: 768px) {
-  #splashScreen {
-    z-index: 9999;
-  }
-
-  .logo-transition {
-    z-index: 9998;
-  }
-
-  .main-content {
-    z-index: 1;
-  }
-}
-
-/* Main Content Transitions */
+/* Main Content */
 .main-content {
   opacity: 0;
-  transform: translateY(60px);
-  transition: 
-    opacity 1.2s cubic-bezier(0.645, 0.045, 0.355, 1),
-    transform 1.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    visibility 0s linear;
   visibility: hidden;
-  will-change: transform, opacity;
+  transition: opacity 1s ease, visibility 1s ease;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .main-content.visible {
   opacity: 1;
-  transform: translateY(0);
   visibility: visible;
-  z-index: 1;
 }
 
+/* Section Reveal Animations */
 .welcome-section,
 .expertise-section,
 .projects-section,
@@ -2353,12 +1947,7 @@ html, body {
 .ethos-section {
   opacity: 0;
   transform: translateY(40px);
-  transition: 
-    opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1),
-    transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  perspective: 1000px;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .welcome-section.reveal,
@@ -2371,17 +1960,14 @@ html, body {
   transform: translateY(0);
 }
 
-/* Smooth reveal for child elements */
+/* Child Element Reveal Animations */
 .expertise-box,
 .project-card,
 .testimonial,
 .award-card {
   opacity: 0;
   transform: translateY(30px);
-  transition: 
-    opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
-    transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, opacity;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .expertise-box.reveal,
@@ -2392,7 +1978,7 @@ html, body {
   transform: translateY(0);
 }
 
-/* Staggered delays for smoother group animations */
+/* Staggered Animation Delays */
 .expertise-box:nth-child(1) { transition-delay: 0.1s; }
 .expertise-box:nth-child(2) { transition-delay: 0.2s; }
 .expertise-box:nth-child(3) { transition-delay: 0.3s; }
@@ -2403,579 +1989,8 @@ html, body {
 .project-card:nth-child(4) { transition-delay: 0.4s; }
 .project-card:nth-child(5) { transition-delay: 0.5s; }
 
-/* Smooth scroll behavior */
+/* Smooth Scroll Behavior */
 html {
   scroll-behavior: smooth;
-}
-
-/* Logo Transition Styles */
-.logo-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-  z-index: 9998;
-  pointer-events: none;
-}
-
-.logo-transition.visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.logo-transition.fade-out {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.logo-container {
-  text-align: center;
-  transform: scale(0.8);
-  opacity: 0;
-  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-text {
-  font-family: 'Arial', sans-serif;
-  font-size: 4rem;
-  font-weight: bold;
-  color: #fff;
-  margin: 0;
-  letter-spacing: 4px;
-  position: relative;
-}
-
-.tagline {
-  font-family: 'Arial', sans-serif;
-  font-size: 1.5rem;
-  color: #daa520;
-  margin-top: 30px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 1s ease;
-}
-
-/* Royal Door Styles - Enhanced Realism */
-.door-surface {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    linear-gradient(135deg, 
-      #2b1810 0%,
-      #3a2419 15%,
-      #4a3020 30%,
-      #5c3d2a 50%,
-      #4a3020 70%,
-      #3a2419 85%,
-      #2b1810 100%
-    );
-  box-shadow: 
-    inset 0 0 100px rgba(0,0,0,0.9),
-    inset 20px 0 80px rgba(0,0,0,0.8),
-    inset -20px 0 80px rgba(0,0,0,0.8),
-    0 0 50px rgba(0,0,0,0.8),
-    10px 0 30px rgba(0,0,0,0.4),
-    -10px 0 30px rgba(0,0,0,0.4);
-  border: 12px solid #2b1810;
-  box-sizing: border-box;
-  transition: all 0.5s ease;
-}
-
-/* Decorative Border Pattern */
-.door-surface::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  border: 3px solid rgba(139,69,19,0.4);
-  box-shadow: 
-    inset 0 0 30px rgba(139,69,19,0.4),
-    0 0 20px rgba(139,69,19,0.3);
-  background-image: 
-    linear-gradient(45deg, rgba(139,69,19,0.1) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(139,69,19,0.1) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(139,69,19,0.1) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(139,69,19,0.1) 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  pointer-events: none;
-  transition: all 0.5s ease;
-}
-
-/* Decorative Center Pattern */
-.door-surface::after {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  background: 
-    radial-gradient(circle at center, transparent 0%, transparent 85%, rgba(139,69,19,0.2) 100%),
-    repeating-linear-gradient(
-      -45deg,
-      transparent 0px,
-      transparent 10px,
-      rgba(139,69,19,0.05) 10px,
-      rgba(139,69,19,0.05) 20px
-    );
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-/* Ornamental Design */
-.door-ornament {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: 
-    radial-gradient(
-      circle at center,
-      rgba(218,165,32,0.1) 0%,
-      rgba(218,165,32,0.05) 60%,
-      transparent 100%
-    );
-  border: 2px solid rgba(139,69,19,0.2);
-  border-radius: 50%;
-  box-shadow: 
-    inset 0 0 20px rgba(218,165,32,0.1),
-    0 0 15px rgba(218,165,32,0.1);
-  pointer-events: none;
-}
-
-.door-ornament::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  border: 1px solid rgba(139,69,19,0.2);
-  border-radius: 50%;
-  background: 
-    repeating-conic-gradient(
-      from 0deg,
-      rgba(139,69,19,0.1) 0deg 10deg,
-      transparent 10deg 30deg
-    );
-}
-
-.door-ornament::after {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  border: 1px solid rgba(139,69,19,0.15);
-  border-radius: 50%;
-  background: 
-    conic-gradient(
-      from 45deg,
-      rgba(218,165,32,0.1) 0deg,
-      transparent 60deg,
-      rgba(218,165,32,0.1) 120deg,
-      transparent 180deg,
-      rgba(218,165,32,0.1) 240deg,
-      transparent 300deg,
-      rgba(218,165,32,0.1) 360deg
-    );
-}
-
-/* Wood Grain Enhancement */
-.wood-grain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      rgba(43,24,16,0.8) 0px,
-      rgba(90,55,35,0.8) 4px,
-      rgba(43,24,16,0.8) 8px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 50px,
-      rgba(139,69,19,0.05) 50px,
-      rgba(139,69,19,0.05) 51px,
-      transparent 51px,
-      transparent 100px
-    );
-  opacity: 0.3;
-  mix-blend-mode: overlay;
-}
-
-/* Corner Flourishes */
-.door-corner {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: 
-    radial-gradient(
-      circle at center,
-      rgba(218,165,32,0.1) 0%,
-      transparent 70%
-    );
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.door-corner::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  border: 1px solid rgba(139,69,19,0.2);
-  border-radius: 50%;
-  background: 
-    conic-gradient(
-      from 0deg,
-      rgba(139,69,19,0.1) 0deg,
-      transparent 90deg,
-      rgba(139,69,19,0.1) 180deg,
-      transparent 270deg,
-      rgba(139,69,19,0.1) 360deg
-    );
-}
-
-.door-corner.top-left { top: 30px; left: 30px; }
-.door-corner.top-right { top: 30px; right: 30px; }
-.door-corner.bottom-left { bottom: 30px; left: 30px; }
-.door-corner.bottom-right { bottom: 30px; right: 30px; }
-
-/* Mobile Optimization */
-@media (max-width: 768px) {
-  .door-ornament {
-    width: 150px;
-    height: 150px;
-  }
-
-  .door-corner {
-    width: 40px;
-    height: 40px;
-  }
-
-  .door-corner.top-left { top: 20px; left: 20px; }
-  .door-corner.top-right { top: 20px; right: 20px; }
-  .door-corner.bottom-left { bottom: 20px; left: 20px; }
-  .door-corner.bottom-right { bottom: 20px; right: 20px; }
-}
-
-/* Door Knob Assembly */
-.door-knob-assembly {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 60px;
-  height: 60px;
-  z-index: 5;
-  transition: all 0.3s ease;
-}
-
-.door-knob {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-  border-radius: 50%;
-  box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.knob-highlight {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 20%;
-  height: 20%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.door-knob:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #3a3a3a 0%, #222222 100%);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15);
-}
-
-.door-knob:active {
-  transform: scale(0.95);
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-}
-
-.splash-door.left .door-knob-assembly {
-  right: 15%;
-}
-
-.splash-door.right .door-knob-assembly {
-  left: 15%;
-}
-
-@media (max-width: 768px) {
-  .door-knob-assembly {
-    width: 40px;
-    height: 40px;
-  }
-
-  .splash-door.left .door-knob-assembly {
-    right: 20%;
-  }
-
-  .splash-door.right .door-knob-assembly {
-    left: 20%;
-  }
-}
-
-@media (max-width: 480px) {
-  .door-knob-assembly {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-/* Royal Door Knob Styles */
-.door-knob-assembly {
-  position: absolute;
-  top: 50%;
-  right: 80px;
-  transform: translateY(-50%);
-  width: 120px;
-  height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.door-knob-backplate {
-  position: relative;
-  width: 100%;
-  height: 160px;
-  background: linear-gradient(135deg,
-    #8b4513 0%,
-    #daa520 25%,
-    #ffd700 50%,
-    #daa520 75%,
-    #8b4513 100%
-  );
-  border-radius: 10px;
-  box-shadow:
-    inset 0 0 20px rgba(0,0,0,0.5),
-    0 0 15px rgba(218,165,32,0.4);
-  padding: 10px;
-  border: 2px solid #8b4513;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-}
-
-.backplate-design {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  border: 1px solid rgba(139,69,19,0.6);
-  border-radius: 6px;
-  background: 
-    repeating-conic-gradient(
-      from 0deg,
-      rgba(139,69,19,0.2) 0deg 10deg,
-      transparent 10deg 30deg
-    );
-  box-shadow: 
-    inset 0 0 10px rgba(218,165,32,0.2),
-    0 0 5px rgba(218,165,32,0.2);
-}
-
-.backplate-design::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  border: 1px solid rgba(139,69,19,0.4);
-  border-radius: 4px;
-  background: 
-    radial-gradient(
-      circle at center,
-      rgba(218,165,32,0.15) 0%,
-      transparent 70%
-    );
-}
-
-.door-knob {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg,
-    #8b4513 0%,
-    #daa520 30%,
-    #ffd700 50%,
-    #daa520 70%,
-    #8b4513 100%
-  );
-  border-radius: 50%;
-  box-shadow:
-    inset 0 0 15px rgba(0,0,0,0.6),
-    0 0 20px rgba(218,165,32,0.4),
-    0 5px 15px rgba(0,0,0,0.4);
-  border: 2px solid #8b4513;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-}
-
-.knob-highlight {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255,255,255,0.8) 0%,
-    rgba(255,255,255,0.3) 40%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-.keyhole {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 30px;
-  background: #111;
-  border-radius: 50% 50% 5px 5px;
-  box-shadow:
-    inset 0 0 5px rgba(255,255,255,0.1),
-    0 0 5px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-
-.keyhole-shine {
-  position: absolute;
-  top: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 10px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.3) 0%,
-    transparent 100%
-  );
-  border-radius: 3px;
-}
-
-/* Door Knob Hover Effects */
-.door-knob:hover {
-  transform: translate(-50%, -50%) scale(1.05);
-  box-shadow:
-    inset 0 0 20px rgba(0,0,0,0.6),
-    0 0 25px rgba(218,165,32,0.6),
-    0 8px 20px rgba(0,0,0,0.4);
-}
-
-.door-knob:hover ~ .keyhole {
-  box-shadow:
-    inset 0 0 8px rgba(255,255,255,0.2),
-    0 0 8px rgba(218,165,32,0.3);
-}
-
-.door-knob:active {
-  transform: translate(-50%, -50%) scale(0.95);
-  box-shadow:
-    inset 0 0 25px rgba(0,0,0,0.7),
-    0 0 15px rgba(218,165,32,0.3),
-    0 3px 10px rgba(0,0,0,0.4);
-}
-
-/* Mobile Optimization for Door Knob */
-@media (max-width: 768px) {
-  .door-knob-assembly {
-    right: 40px;
-    width: 90px;
-    height: 140px;
-  }
-
-  .door-knob-backplate {
-    height: 120px;
-  }
-
-  .door-knob {
-    width: 45px;
-    height: 45px;
-  }
-
-  .knob-highlight {
-    top: 6px;
-    left: 6px;
-    width: 15px;
-    height: 15px;
-  }
-
-  .keyhole {
-    width: 15px;
-    height: 22px;
-  }
-
-  .keyhole-shine {
-    width: 4px;
-    height: 8px;
-  }
-}
-
-/* Right Door Knob Position */
-.splash-door.right .door-knob-assembly {
-  right: auto;
-  left: 80px;
-}
-
-@media (max-width: 768px) {
-  .splash-door.right .door-knob-assembly {
-    left: 40px;
-  }
 }
 

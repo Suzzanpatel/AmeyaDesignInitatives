@@ -1,12 +1,8 @@
-// Splash Screen Animation
+// Page Load Animation
 document.addEventListener('DOMContentLoaded', function() {
-  const splashScreen = document.getElementById('splashScreen');
-  const leftDoor = document.querySelector('.splash-door.left');
-  const rightDoor = document.querySelector('.splash-door.right');
   const mainContent = document.querySelector('.main-content');
   const logoTransition = document.querySelector('.logo-transition');
   const logoContainer = document.querySelector('.logo-container');
-  let doorsOpened = false;
   
   // Get all sections for reveal animation
   const sections = document.querySelectorAll('.welcome-section, .expertise-section, .projects-section, .testimonials-section, .awards-container, .ethos-section');
@@ -54,241 +50,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Enhanced mobile touch handling for doors
-  const isMobile = window.innerWidth <= 768;
-  
-  if (isMobile) {
-    // Disable hover effects on mobile
-    const doors = document.querySelectorAll('.splash-door');
-    doors.forEach(door => {
-      door.addEventListener('touchstart', (e) => {
-        if (!doorsOpened) {
-          const handle = door.querySelector('.door-handle');
-          handle.style.transform = 'translateY(-50%) scale(1.1)';
-        }
-      }, { passive: true });
+  // Show logo transition immediately
+  logoTransition.classList.add('visible');
+  logoContainer.style.transform = 'scale(1)';
+  logoContainer.style.opacity = '1';
 
-      door.addEventListener('touchend', (e) => {
-        if (!doorsOpened) {
-          const handle = door.querySelector('.door-handle');
-          handle.style.transform = 'translateY(-50%) scale(1)';
-        }
-      });
-    });
-
-    // Optimize door opening animation for mobile
-    function openDoorsForMobile() {
-      if (doorsOpened) return;
-      
-      // Add opening class with mobile-optimized timing
-      leftDoor.classList.add('opening');
-      rightDoor.classList.add('opening');
-      
-      // Use shorter animation duration for mobile but keep it smooth
-      leftDoor.style.transition = 'transform 2.5s cubic-bezier(0.22, 1, 0.36, 1)';
-      rightDoor.style.transition = 'transform 2.5s cubic-bezier(0.22, 1, 0.36, 1)';
-      
-      setTimeout(() => {
-        leftDoor.classList.add('open');
-        rightDoor.classList.add('open');
-        doorsOpened = true;
-
-        // Fade out splash screen with mobile-optimized timing
-        setTimeout(() => {
-          splashScreen.classList.add('fade-out');
-          
-          // Show logo transition
-          logoTransition.classList.add('visible');
-          logoContainer.style.transform = 'scale(1)';
-          logoContainer.style.opacity = '1';
-
-          // Hide logo and show main content with adjusted timing
-          setTimeout(() => {
-            logoTransition.classList.add('fade-out');
-            mainContent.classList.add('visible');
-            
-            setTimeout(() => {
-              startSectionObservers();
-              
-              // Optimize initial section reveals for mobile
-              const initialSections = document.querySelectorAll('.welcome-section, .expertise-section');
-              initialSections.forEach(section => {
-                if (isElementInViewport(section)) {
-                  section.classList.add('reveal');
-                  
-                  const childElements = section.querySelectorAll('.expertise-box, .project-card');
-                  childElements.forEach((element, index) => {
-                    setTimeout(() => {
-                      element.classList.add('reveal');
-                    }, index * 100);
-                  });
-                }
-              });
-            }, 600);
-          }, 2000);
-        }, 1500);
-      }, 100);
-    }
-
-    // Replace original openDoors function with mobile version
-    window.openDoors = openDoorsForMobile;
-
-    // Trigger automatic door opening sooner on mobile
-    setTimeout(() => {
-      if (!doorsOpened) {
-        openDoorsForMobile();
-      }
-    }, 1000); // Faster initial delay for mobile
-  }
-
-  // Function to check viewport width
-  function isLaptopView() {
-    return window.innerWidth >= 769 && window.innerWidth <= 1366;
-  }
-
-  // Function to check larger screens
-  function isLargeScreen() {
-    return window.innerWidth > 1366;
-  }
-
-  // Function to get perspective based on screen size
-  function getPerspective() {
-    if (isLargeScreen()) return 4000;
-    if (isLaptopView()) return 3000;
-    return 2000;
-  }
-
-  // Function to handle door opening
-  function openDoors() {
-    if (doorsOpened) return;
-    
-    const perspective = getPerspective();
-    
-    leftDoor.classList.add('opening');
-    rightDoor.classList.add('opening');
-    
-    // Set transition with smoother timing - reduced from 4s to 3s
-    leftDoor.style.transition = 'transform 3s cubic-bezier(0.22, 1, 0.36, 1)';
-    rightDoor.style.transition = 'transform 3s cubic-bezier(0.22, 1, 0.36, 1)';
-    
-    // Force a reflow to ensure the transition works
-    leftDoor.offsetHeight;
-    rightDoor.offsetHeight;
-    
-    setTimeout(() => {
-      leftDoor.classList.add('open');
-      rightDoor.classList.add('open');
-      doorsOpened = true;
-
-      // Fade out splash screen after doors open - reduced from 4000ms to 2500ms
-      setTimeout(() => {
-        splashScreen.classList.add('fade-out');
-        
-        // Show logo transition
-        logoTransition.classList.add('visible');
-        logoContainer.style.transform = 'scale(1)';
-        logoContainer.style.opacity = '1';
-
-        // Hide logo and show main content - reduced from 3000ms to 2000ms
-        setTimeout(() => {
-          logoTransition.classList.add('fade-out');
-          mainContent.classList.add('visible');
-          
-          setTimeout(() => {
-            startSectionObservers();
-            
-            // Add smooth reveal to initial viewport sections
-            const initialSections = document.querySelectorAll('.welcome-section, .expertise-section');
-            initialSections.forEach(section => {
-              if (isElementInViewport(section)) {
-                section.classList.add('reveal');
-                
-                // Reveal child elements with slower stagger
-                const childElements = section.querySelectorAll('.expertise-box, .project-card');
-                childElements.forEach((element, index) => {
-                  setTimeout(() => {
-                    element.classList.add('reveal');
-                  }, index * 200);
-                });
-              }
-            });
-          }, 1000);
-        }, 2000);
-      }, 2500);
-    }, 100);
-  }
-
-  // Add click listeners to door handles
-  const doorHandles = document.querySelectorAll('.door-handle');
-  doorHandles.forEach(handle => {
-    handle.addEventListener('click', openDoors);
-  });
-
-  // Add hover effects for non-mobile devices
-  if (!window.matchMedia('(max-width: 768px)').matches) {
-    const doors = document.querySelectorAll('.splash-door');
-    doors.forEach(door => {
-      door.addEventListener('mouseenter', () => {
-        if (!doorsOpened) {
-          door.querySelector('.door-surface').style.transform = 'scale(0.99)';
-          door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1.1)';
-          door.querySelector('.door-handle').style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        }
-      });
-
-      door.addEventListener('mouseleave', () => {
-        if (!doorsOpened) {
-          door.querySelector('.door-surface').style.transform = 'scale(1)';
-          door.querySelector('.door-handle').style.transform = 'translateY(-50%) scale(1)';
-        }
-      });
-    });
-
-    // Add subtle door movement on mouse move with slower response
-    document.addEventListener('mousemove', (e) => {
-      if (doorsOpened) return;
-
-      const mouseX = e.clientX / window.innerWidth;
-      const mouseY = e.clientY / window.innerHeight;
-      
-      const leftRotation = (mouseX - 0.5) * 1.5; // Reduced rotation amount
-      const rightRotation = (mouseX - 0.5) * -1.5;
-      const verticalTilt = (mouseY - 0.5) * 1.5;
-
-      const perspective = getPerspective();
-      
-      leftDoor.style.transition = 'transform 0.3s ease-out';
-      rightDoor.style.transition = 'transform 0.3s ease-out';
-      
-      leftDoor.style.transform = `perspective(${perspective}px) rotateY(${leftRotation}deg) rotateX(${verticalTilt}deg)`;
-      rightDoor.style.transform = `perspective(${perspective}px) rotateY(${rightRotation}deg) rotateX(${verticalTilt}deg)`;
-    });
-  }
-
-  // Handle window resize
-  window.addEventListener('resize', () => {
-    const perspective = getPerspective();
-    if (!doorsOpened) {
-      leftDoor.style.transform = `perspective(${perspective}px) rotateY(0deg)`;
-      rightDoor.style.transform = `perspective(${perspective}px) rotateY(0deg)`;
-    }
-  });
-
-  // Trigger automatic door opening with adjusted initial delay - reduced from 2500ms to 2000ms
+  // Hide logo and show main content after delay
   setTimeout(() => {
-    if (!doorsOpened) {
-      openDoors();
-    }
+    logoTransition.classList.add('fade-out');
+    mainContent.classList.add('visible');
+    
+    setTimeout(() => {
+      startSectionObservers();
+      
+      // Reveal initial sections
+      const initialSections = document.querySelectorAll('.welcome-section, .expertise-section');
+      initialSections.forEach(section => {
+        if (isElementInViewport(section)) {
+          section.classList.add('reveal');
+          
+          const childElements = section.querySelectorAll('.expertise-box, .project-card');
+          childElements.forEach((element, index) => {
+            setTimeout(() => {
+              element.classList.add('reveal');
+            }, index * 100);
+          });
+        }
+      });
+    }, 600);
   }, 2000);
-});
 
-// Initialize page animations
-function initializePageAnimations() {
-    // Add your existing page animation code here
-    // This function will be called after the doors open and content is visible
-}
-
-document.addEventListener('DOMContentLoaded', () => {
   // Navigation menu toggle
   const menuIcon = document.querySelector('.menu-icon');
   const navLinks = document.querySelector('.nav-links');
