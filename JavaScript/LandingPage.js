@@ -117,79 +117,65 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (link && dropdownContent) {
       // Set up dropdown items for staggered animation
-      const dropdownItems = dropdownContent.querySelectorAll('a');
-      dropdownItems.forEach((dropItem, index) => {
+      const dropdownLinks = dropdownContent.querySelectorAll('a');
+      dropdownLinks.forEach((dropItem, index) => {
         dropItem.style.setProperty('--index', index + 1);
+        
+        // Add click handler for dropdown links
+        dropItem.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            // Allow navigation for dropdown items
+            navLinks.classList.remove('active');
+          }
+        });
       });
       
       link.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
-          e.preventDefault(); // Prevent navigation on mobile when clicking dropdown parent
+          e.preventDefault(); // Always prevent default for parent dropdown items
           
-          // Create smooth opening/closing effect
+          // Toggle dropdown
           if (!item.classList.contains('active')) {
-            // Opening animation
-            item.classList.add('active');
+            // Close other dropdowns first
+            dropdownItems.forEach(otherItem => {
+              if (otherItem !== item && otherItem.classList.contains('active')) {
+                otherItem.classList.remove('active');
+                const otherIndicator = otherItem.querySelector('.dropdown-indicator');
+                if (otherIndicator) {
+                  otherIndicator.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
             
-            // Apply subtle scale animation to the dropdown indicator
+            // Open this dropdown
+            item.classList.add('active');
             const indicator = link.querySelector('.dropdown-indicator');
             if (indicator) {
               indicator.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)';
               indicator.style.transform = 'rotate(180deg)';
             }
-            
-            // Subtle shimmer effect on the border
-            const shimmer = document.createElement('div');
-            shimmer.style.position = 'absolute';
-            shimmer.style.width = '100%';
-            shimmer.style.height = '1px';
-            shimmer.style.background = 'linear-gradient(to right, transparent, #ffcc70, transparent)';
-            shimmer.style.bottom = '0';
-            shimmer.style.left = '0';
-            shimmer.style.animation = 'shimmer 1.5s ease forwards';
-            shimmer.style.opacity = '0';
-            link.appendChild(shimmer);
-            
-            setTimeout(() => {
-              shimmer.remove();
-            }, 1500);
           } else {
-            // Closing animation
+            // Close this dropdown
+            item.classList.remove('active');
             const indicator = link.querySelector('.dropdown-indicator');
             if (indicator) {
-              indicator.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)';
               indicator.style.transform = 'rotate(0deg)';
             }
-            
-            // Delay the removal of active class for smoother animation
-            setTimeout(() => {
-              item.classList.remove('active');
-            }, 50);
           }
-          
-          // Close other dropdowns
-          dropdownItems.forEach(otherItem => {
-            if (otherItem !== item && otherItem.classList.contains('active')) {
-              // Reset other dropdown indicators
-              const otherIndicator = otherItem.querySelector('.dropdown-indicator');
-              if (otherIndicator) {
-                otherIndicator.style.transition = 'transform 0.4s ease';
-                otherIndicator.style.transform = 'rotate(0deg)';
-              }
-              
-              otherItem.classList.remove('active');
-            }
-          });
         }
       });
     }
   });
   
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-item')) {
       dropdownItems.forEach(item => {
         item.classList.remove('active');
+        const indicator = item.querySelector('.dropdown-indicator');
+        if (indicator) {
+          indicator.style.transform = 'rotate(0deg)';
+        }
       });
     }
   });
@@ -778,6 +764,16 @@ document.addEventListener('DOMContentLoaded', function() {
       showSlide(currentIndex + 1);
     }, 10000);
   }
+
+  // Close mobile menu when a link is clicked
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && window.innerWidth <= 768) {
+      // If it's a dropdown link (not a parent dropdown), close the menu
+      if (!e.target.closest('.nav-item') || e.target.closest('.dropdown-content')) {
+        navLinks.classList.remove('active');
+      }
+    }
+  });
 });
 
 // For backward compatibility with other code
