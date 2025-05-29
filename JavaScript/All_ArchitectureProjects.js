@@ -13,34 +13,80 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle dropdown toggles on mobile
     navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                // Remove active class from other items
-                navItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
+        const link = item.querySelector('a');
+        const dropdownContent = item.querySelector('.dropdown-content');
+        
+        if (link && dropdownContent) {
+            // Set up dropdown items for staggered animation
+            const dropdownLinks = dropdownContent.querySelectorAll('a');
+            dropdownLinks.forEach((dropItem, index) => {
+                dropItem.style.setProperty('--index', index + 1);
+            });
+
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    
+                    // Close other dropdowns first
+                    navItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            const otherIndicator = otherItem.querySelector('.dropdown-indicator');
+                            if (otherIndicator) {
+                                otherIndicator.style.transform = 'rotate(0deg)';
+                            }
+                        }
+                    });
+
+                    // Toggle current dropdown
+                    item.classList.toggle('active');
+                    const indicator = link.querySelector('.dropdown-indicator');
+                    if (indicator) {
+                        indicator.style.transform = item.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    }
+                }
+            });
+
+            // Handle clicks on dropdown links
+            dropdownLinks.forEach(dropLink => {
+                dropLink.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        // Don't prevent default here to allow navigation
+                        navLinks.classList.remove('active');
+                        menuIcon.textContent = '☰';
                     }
                 });
-                item.classList.toggle('active');
-            }
-        });
+            });
+        }
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !menuIcon.contains(e.target) && navLinks.classList.contains('active')) {
+        if (!navLinks.contains(e.target) && !menuIcon.contains(e.target)) {
             navLinks.classList.remove('active');
             menuIcon.textContent = '☰';
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                const indicator = item.querySelector('.dropdown-indicator');
+                if (indicator) {
+                    indicator.style.transform = 'rotate(0deg)';
+                }
+            });
         }
     });
 
-    // Close menu when window is resized above mobile breakpoint
+    // Handle window resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             navLinks.classList.remove('active');
             menuIcon.textContent = '☰';
-            navItems.forEach(item => item.classList.remove('active'));
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                const indicator = item.querySelector('.dropdown-indicator');
+                if (indicator) {
+                    indicator.style.transform = 'rotate(0deg)';
+                }
+            });
         }
     });
 
@@ -247,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle window resize
+    // Handle window resize for navbar
     window.addEventListener('resize', () => {
         if (window.innerWidth <= mobileBreakpoint) {
             navbar.classList.remove('hidden');
@@ -256,4 +302,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize navbar state
     handleNavbarScroll();
-}); 
+});
+
+function updateCinematicView(activeIndex) {
+    updateCinematicViewForTallerCards(activeIndex);
+}
+
