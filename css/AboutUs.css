@@ -1,9 +1,24 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background-color: #000;
+}
+
 /* About Us Banner */
 .about-banner {
   position: relative;
   width: 100%;
   height: 500px;
-  background-image: url('/Assets/AboutUs/Banner.png');
+  background-image: url('../Assets/AboutUs/Banner.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -55,19 +70,22 @@
 
 /* About Content Section */
 .about-content {
-  padding: 5rem 2rem;
-  background-color: #000;
+  padding: 5rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   position: relative;
-  overflow: hidden;
 }
 
 .about-container {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
   gap: 4rem;
   align-items: flex-start;
   position: relative;
+  padding: 0 1rem;
 }
 
 .about-text {
@@ -270,6 +288,7 @@
   .about-container {
     flex-direction: column;
     gap: 3rem;
+    padding: 0;
   }
   
   .about-text {
@@ -279,6 +298,7 @@
   .about-text h2 {
     position: relative;
     margin-bottom: 1.5rem;
+    font-size: 2rem;
   }
   
   .about-text .content-wrapper {
@@ -289,6 +309,7 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    transform: none !important;
   }
   
   .banner-content h1 {
@@ -298,19 +319,20 @@
   .stats-section {
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
-  }
-
-  .stats-heading {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+    padding: 0 1rem;
   }
 
   .stats-container {
-    padding: 1.5rem 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .stats-grid {
-    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
   }
 
   .stat-number {
@@ -320,28 +342,55 @@
 
 @media screen and (max-width: 768px) {
   .about-banner {
-    height: 400px;
+    height: 300px;
+    background-attachment: scroll;
   }
   
   .about-content {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1rem;
   }
   
   .banner-content h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    padding: 0 1rem;
   }
   
   .about-text h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 2rem;
   }
   
   .about-text p {
     font-size: 1rem;
+    padding: 0 0.5rem;
+    text-align: left;
   }
 
-  .stats-section {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+  .why-adi-section {
+    padding: 2rem 1rem;
+  }
+
+  .why-adi-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .why-adi-item {
+    padding: 1.5rem;
+  }
+
+  .timeline-section {
+    padding: 2rem 1rem;
+  }
+
+  .timeline {
+    padding: 0;
+  }
+
+  .nav-links {
+    width: 100%;
+    padding: 1rem;
   }
 
   .stats-heading {
@@ -369,11 +418,11 @@
 
 @media screen and (max-width: 576px) {
   .about-banner {
-    height: 300px;
+    height: 250px;
   }
   
   .banner-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .about-content {
@@ -385,7 +434,7 @@
   }
   
   .about-text h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .stats-section {
@@ -393,7 +442,7 @@
   }
 
   .stats-heading {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
   }
 
@@ -402,11 +451,43 @@
   }
 
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .stat-label {
     font-size: 0.75rem;
+  }
+
+  .why-adi-title h2 {
+    font-size: 1.8rem;
+  }
+
+  .why-adi-item {
+    padding: 1.2rem;
+  }
+
+  .why-adi-item h3 {
+    font-size: 1.4rem;
+  }
+
+  .feature-list li {
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    padding: 1rem;
+  }
+
+  .year {
+    font-size: 1rem;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
   }
 }
 
