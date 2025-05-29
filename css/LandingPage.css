@@ -352,44 +352,47 @@ a:hover {
   background-color: rgba(255,255,255,0.03);
   border-radius: 10px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  padding: 2.5rem;
-  margin: 2rem auto;
+  padding: 3rem;
+  margin: 2.5rem auto;
   width: 100%;
   max-width: 900px;
 }
 
 .client-photo {
   margin-right: 0;
-  margin-bottom: 1.5rem;
-}
-
-.client-photo img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ffcc70;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
 }
 
 .testimonial-content {
   flex: 1;
   text-align: center;
+  max-width: 800px;
 }
 
 .client-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #ffcc70;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.5px;
 }
 
 .client-review {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.3rem;
+  line-height: 1.7;
   color: #ddd;
   margin: 0;
+  text-align: center;
+}
+
+.client-photo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffcc70;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Navigation Controls */
@@ -686,138 +689,185 @@ a:hover {
   .ethos-section,
   .expertise-section,
   .section {
-    padding: 2.5rem 0;
+    padding: 1rem 0;
   }
   
-  .projects-section h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  .section-content {
+    padding: 0 1rem;
   }
   
-  .project-cards-wrapper {
-    gap: 20px;
-    padding: 20px 10px;
+  .testimonial {
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    width: 90%;
   }
   
-  .project-card {
-    flex: 0 0 220px;
-    height: 330px;
+  .testimonial-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0.5rem;
   }
   
-  .project-content {
-    opacity: 1;
-    transform: translateY(0);
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
-    padding: 20px;
-  }
-  
-  .project-card::before {
-    opacity: 1;
-    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6));
-  }
-  
-  .project-content h3 {
+  .client-name {
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
   }
   
-  .project-content .btn-view-project {
-    padding: 6px 12px;
-    font-size: 0.8rem;
+  .client-review {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .client-photo img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Reduce spacing between sections */
+  .section + .section,
+  .projects-section + .section,
+  .expertise-section + .section,
+  .testimonials-section + .section {
+    margin-top: 0.5rem;
+  }
+  
+  .awards-container,
+  .expertise-container,
+  .projects-container {
+    padding: 0.8rem;
   }
 }
 
 @media screen and (max-width: 576px) {
-  .projects-section {
-    padding: 2rem 0;
+  .projects-section,
+  .testimonials-section,
+  .ethos-section,
+  .expertise-section,
+  .section {
+    padding: 0.8rem 0;
   }
   
-  .project-cards-wrapper {
-    gap: 15px;
+  .section-content {
+    padding: 0 0.6rem;
   }
   
-  .project-card {
-    flex: 0 0 200px;
-    height: 300px;
+  .testimonial {
+    padding: 1.2rem 0.8rem;
+    margin: 0.8rem auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   }
   
-  .nav-arrow {
-    padding: 8px 15px;
-    font-size: 1.2rem;
+  .testimonial-content {
+    padding: 0 0.3rem;
   }
   
-  .view-all-projects {
-    padding: 10px 20px;
+  .client-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .client-review {
     font-size: 0.9rem;
-    margin-top: 2rem;
+    line-height: 1.4;
   }
+  
+  .client-photo img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Further reduce spacing between sections */
+  .section + .section,
+  .projects-section + .section,
+  .expertise-section + .section,
+  .testimonials-section + .section {
+    margin-top: 0.3rem;
+  }
+  
+  .testimonial-navigation {
+    margin-top: 0.5rem;
+  }
+  
+  .testimonial-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .testimonial-dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Update testimonial container max-width for better text containment */
+.testimonial {
+  max-width: 800px;
+  width: 90%;
+  margin: 2rem auto;
+  box-sizing: border-box;
+}
+
+.testimonial-content {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure text stays within bounds */
+.client-review {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Awards Section */
 .awards-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
-  text-align: center;
+}
+
+.awards-container h2 {
+  width: 100%;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
 .awards-list {
   flex: 1;
-  min-width: 300px;
-  text-align: center;
+  padding-right: 2rem;
 }
 
-.awards-list h2 {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 3rem;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 2px;
-  position: relative;
-  display: inline-block;
+.awards-list h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
-.awards-list h2::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: #ffcc70;
-}
-
-.awards-list ul {
-  padding-left: 0;
-  list-style: none;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.awards-list li {
-  margin-bottom: 1rem;
-  position: relative;
-  font-weight: 300;
-  padding: 0.5rem 0;
-  text-align: center;
+.awards-list p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 2rem;
 }
 
 .award-showcase {
   flex: 1;
   min-width: 300px;
-  max-width: 450px;
-  perspective: 1000px;
 }
 
 .award-card {
@@ -828,6 +878,7 @@ a:hover {
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #111;
 }
 
 .award-card:hover {
@@ -878,6 +929,7 @@ a:hover {
   font-size: 1.6rem;
   font-weight: 500;
   letter-spacing: 1px;
+  color: #fff;
 }
 
 .view-more {
@@ -914,10 +966,6 @@ a:hover {
   left: 0;
 }
 
-.view-more::after {
-  display: none;
-}
-
 /* Cinematic light effect */
 .award-card::before {
   content: '';
@@ -951,22 +999,34 @@ a:hover {
 
 /* Responsive styling */
 @media screen and (max-width: 992px) {
-  .awards-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .award-showcase {
-    width: 100%;
-    max-width: 100%;
-  }
-  
   .award-card {
     height: 550px;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .awards-container {
+    flex-direction: column;
+  }
+  
+  .awards-list {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .awards-list h3 {
+    font-size: 1.8rem !important;  /* Override inline style for mobile */
+    margin-bottom: 1rem;
+  }
+  
+  .awards-list p {
+    font-size: 1.1rem !important;  /* Override inline style for mobile */
+  }
+  
+  .award-showcase {
+    width: 100%;
+  }
+
   .award-card {
     height: 500px;
   }
@@ -977,6 +1037,14 @@ a:hover {
 }
 
 @media screen and (max-width: 576px) {
+  .awards-list h3 {
+    font-size: 1.5rem !important;  /* Even smaller for very small screens */
+  }
+  
+  .awards-list p {
+    font-size: 1rem !important;
+  }
+
   .award-card {
     height: 450px;
   }
@@ -1605,28 +1673,47 @@ a:hover {
   background-color: rgba(255,255,255,0.03);
   border-radius: 10px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  padding: 2.5rem;
-  margin: 2rem auto;
+  padding: 3rem;
+  margin: 2.5rem auto;
   width: 100%;
   max-width: 900px;
 }
 
 .client-photo {
   margin-right: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .testimonial-content {
   flex: 1;
   text-align: center;
+  max-width: 800px;
 }
 
 .client-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #ffcc70;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.5px;
+}
+
+.client-review {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #ddd;
+  margin: 0;
+  text-align: center;
+}
+
+.client-photo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffcc70;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* In the desktop media query, restore horizontal layout if preferred */
@@ -1684,44 +1771,83 @@ a:hover {
   transform: scale(1.2);
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-  .testimonials-section {
-    padding: 3rem 0;
-  }
-  
-  .testimonial {
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-  }
-  
-  .client-photo {
-    margin-right: 0;
-    margin-bottom: 1.5rem;
-  }
-  
-  .testimonial-content {
-    text-align: center;
-  }
-  
+/* Tablet View */
+@media screen and (max-width: 992px) {
   .client-name {
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+  }
+  
+  .client-review {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .client-photo img {
+    width: 100px;
+    height: 100px;
   }
 }
 
-@media screen and (max-width: 576px) {
-  .client-photo img {
-    width: 80px;
-    height: 80px;
+/* Mobile View - Keep these unchanged */
+@media screen and (max-width: 768px) {
+  .testimonial {
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    width: 90%;
+  }
+  
+  .testimonial-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0.5rem;
   }
   
   .client-name {
     font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .client-review {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .client-photo img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .testimonial {
+    padding: 1.2rem 0.8rem;
+    margin: 0.8rem auto;
+  }
+  
+  .testimonial-content {
+    padding: 0 0.3rem;
+  }
+  
+  .client-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
   }
   
   .client-review {
     font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .client-photo img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.8rem;
   }
 }
 
