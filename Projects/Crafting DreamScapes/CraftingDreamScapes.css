@@ -1,0 +1,265 @@
+/* Crafting Dreamscapes Page Specific Styles */
+:root {
+    --primary-color: #ffcc70;
+    --text-color: #ffffff;
+    --background-dark: #111111;
+    --accent-color: #d4af37;
+    --overlay-dark: rgba(0, 0, 0, 0.85);
+    --border-glow: rgba(255, 255, 255, 0.1);
+}
+
+.project-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.gallery-item {
+    margin-bottom: 2rem;
+    position: relative;
+    background: rgba(84, 83, 83, 0.98);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Container Styling */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #0a0a0a;
+    padding: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+    position: relative;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--border-glow),
+        var(--primary-color),
+        var(--border-glow),
+        transparent
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+/* Main Living Room View */
+.gallery-item.full-width {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.gallery-item.full-width img {
+    max-height: 600px;
+    object-fit: contain;
+}
+
+/* Foyer Section */
+.foyer-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.foyer-section .gallery-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Living Room Section */
+.living-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.living-section .main-view {
+    grid-row: span 2;
+}
+
+.living-section .side-views {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.living-section .side-views img {
+    height: calc(50% - 0.5rem);
+    object-fit: cover;
+}
+
+/* Kitchen Section */
+.kitchen-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.kitchen-section .description-block {
+    grid-column: 1 / -1;
+    padding: 1.5rem 2rem;
+    background: rgba(17, 17, 17, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.kitchen-section .gallery-item img {
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Bedroom and Additional Sections */
+.bedroom-section,
+.additional-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.bedroom-section .gallery-item img,
+.additional-section .gallery-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Text Styling */
+.description-block p,
+.image-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+}
+
+.image-description {
+    padding: 1.5rem 2rem;
+    background: rgba(17, 17, 17, 0.98);
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-description::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-color),
+        transparent
+    );
+    opacity: 0.3;
+}
+
+/* Hover Effects */
+.gallery-item:hover img {
+    transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .project-gallery {
+        padding: 1rem;
+    }
+    
+    .living-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .living-section .side-views {
+        flex-direction: row;
+    }
+    
+    .living-section .side-views img {
+        height: 300px;
+        width: calc(50% - 0.5rem);
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .kitchen-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-item img {
+        height: 350px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .foyer-section,
+    .bedroom-section,
+    .additional-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .kitchen-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .living-section .side-views {
+        flex-direction: column;
+    }
+    
+    .living-section .side-views img {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .project-gallery {
+        padding: 0.5rem;
+    }
+    
+    .gallery-item img {
+        height: 250px !important;
+    }
+    
+    .description-block p,
+    .image-description p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}

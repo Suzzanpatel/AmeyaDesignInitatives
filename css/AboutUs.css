@@ -100,14 +100,12 @@ body {
   font-weight: 500;
   color: #fff;
   margin-bottom: 2rem;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
 }
 
 .about-text .content-wrapper {
-  margin-top: 4.5rem;
+  margin-top: 0;
 }
 
 .about-text h2::after {
