@@ -115,9 +115,19 @@
           </div>
           <div class="expertise-box">
             <div class="expertise-icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://http://www.w3.org/2000/svg">
-                <path d="M3 21V17L7 15V11L4 8L7 5L12 8L17 5L20 8L17 11V15L21 17V21H3Z" stroke="#ffcc70" stroke-width="1.5" stroke-linejoin="round"/>
-                <path d="M9 15L12 13L15 15" stroke="#ffcc70" stroke-width="1.5" stroke-linejoin="round"/>
+              <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer square representing the plot/house -->
+                <rect x="2" y="2" width="20" height="20" stroke="#ffcc70" stroke-width="1.5"/>
+                <!-- Inner square representing the inner spaces -->
+                <rect x="6" y="6" width="12" height="12" stroke="#ffcc70" stroke-width="1.5"/>
+                <!-- Diagonal lines representing directions -->
+                <line x1="2" y1="2" x2="22" y2="22" stroke="#ffcc70" stroke-width="1.5"/>
+                <line x1="22" y1="2" x2="2" y2="22" stroke="#ffcc70" stroke-width="1.5"/>
+                <!-- Cardinal direction markers -->
+                <circle cx="12" cy="2" r="1" fill="#ffcc70"/>  <!-- North -->
+                <circle cx="22" cy="12" r="1" fill="#ffcc70"/> <!-- East -->
+                <circle cx="12" cy="22" r="1" fill="#ffcc70"/> <!-- South -->
+                <circle cx="2" cy="12" r="1" fill="#ffcc70"/>  <!-- West -->
               </svg>
             </div>
             <h3>Vastu</h3>
