@@ -17,7 +17,7 @@
 .gallery-item {
     margin-bottom: 2rem;
     position: relative;
-    background: rgba(84, 83, 83, 0.98);
+    background: rgba(0, 0, 0, 0.98);
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
