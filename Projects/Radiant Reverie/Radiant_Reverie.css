@@ -1,0 +1,150 @@
+/* Radiant Reverie Page Specific Styles */
+:root {
+    --primary-color: #ffcc70;
+    --text-color: #ffffff;
+    --background-dark: #111111;
+    --accent-color: #d4af37;
+    --overlay-dark: rgba(0, 0, 0, 0.85);
+    --border-glow: rgba(255, 255, 255, 0.1);
+}
+
+.project-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.gallery-item {
+    margin-bottom: 2rem;
+    position: relative;
+    background: rgba(0, 0, 0, 0.98);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Container Styling */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #0a0a0a;
+    padding: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+    position: relative;
+    object-fit: cover;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--border-glow),
+        var(--primary-color),
+        var(--border-glow),
+        transparent
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+/* Image Description Styling */
+.image-description {
+    padding: 1.5rem 2rem;
+    background: rgba(17, 17, 17, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.image-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .project-gallery {
+        padding: 0 1rem;
+    }
+
+    .gallery-item img {
+        max-height: 450px;
+    }
+
+    .gallery-item.full-width img {
+        max-height: 550px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .project-gallery {
+        padding: 0 0.5rem;
+    }
+
+    .gallery-grid {
+        gap: 1.5rem;
+    }
+
+    .gallery-item img {
+        max-height: 400px;
+        padding: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .gallery-item img {
+        max-height: 350px;
+        padding: 0.6rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .project-gallery {
+        padding: 0 0.5rem;
+    }
+
+    .gallery-item img {
+        max-height: 300px;
+        padding: 0.5rem;
+    }
+
+    .image-description {
+        padding: 1rem 1.5rem;
+    }
+
+    .image-description p {
+        font-size: 1rem;
+    }
+}
