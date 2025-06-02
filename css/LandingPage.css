@@ -1424,16 +1424,27 @@ a:hover {
 .expertise-icon {
   margin-bottom: 1.5rem;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .expertise-icon svg {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   transition: transform 0.4s ease;
+  display: block;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 .expertise-box:hover .expertise-icon svg {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .expertise-box h3 {
@@ -1523,8 +1534,9 @@ a:hover {
     padding: 1.5rem;
   }
   
-  .expertise-icon {
-    font-size: 2.5rem;
+  .expertise-icon svg {
+    width: 50px;
+    height: 50px;
   }
   
   .expertise-box h3 {
@@ -1552,6 +1564,12 @@ a:hover {
     width: 100%;
     max-width: 320px;
     height: 320px;
+    padding: 1.5rem;
+  }
+  
+  .expertise-icon svg {
+    width: 45px;
+    height: 45px;
   }
 }
 
@@ -1569,6 +1587,11 @@ a:hover {
     max-width: 280px;
     height: 280px;
     padding: 1.2rem;
+  }
+  
+  .expertise-icon svg {
+    width: 40px;
+    height: 40px;
   }
 }
 
