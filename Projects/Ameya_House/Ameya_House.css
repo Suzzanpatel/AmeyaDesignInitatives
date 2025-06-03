@@ -1,27 +1,58 @@
 /* Ameya House Specific Styles */
 :root {
-    --ameya-accent: #ffcc70;
-    --ameya-text: #ffffff;
-    --ameya-bg: #111111;
+    --ameya-accent: #D4AF37;  /* Golden color */
+    --ameya-text: #000000;
+    --ameya-bg: #ffffff;
+    --spacing-unit: 32px;
+    --border-radius: 12px;
+    --container-width: 1200px;
+    --section-bg: #f5f5f5;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+body {
+    background: #000000;
+    color: var(--ameya-text);
 }
 
 /* Custom Header Styling */
 .project-header h1 {
-    font-size: 3.2rem;
-    letter-spacing: 2px;
+    font-size: 4.5rem;
+    letter-spacing: 6px;
     text-transform: uppercase;
+    color: var(--ameya-accent);
+    font-weight: 600;
+    text-shadow: 2px 2px 15px rgba(212, 175, 55, 0.3);
+    margin: 0;
+    padding: 20px 0;
+    position: relative;
+}
+
+.project-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ameya-accent), transparent);
 }
 
 /* Gallery Customization */
 .gallery-item {
-    background: rgba(17, 17, 17, 0.98);
+    position: relative;
+    width: 100%;
+    height: 200px;
 }
 
 .gallery-item img {
-    max-height: 400px;
-    object-fit: contain;
-    padding: 1rem;
-    background: #0a0a0a;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
 .full-width img {
@@ -30,16 +61,17 @@
 
 /* Text Section Enhancement */
 .text-section {
-    background: rgba(17, 17, 17, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    margin: 2rem auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    color: var(--ameya-text);
 }
 
 .text-section p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ameya-text);
 }
 
 /* Mobile Responsiveness */
@@ -58,23 +90,64 @@
 }
 
 @media screen and (max-width: 768px) {
+    :root {
+        --spacing-unit: 20px;
+    }
+
+    .project-container {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .project-header {
+        width: 100%;
+    }
+
     .project-header h1 {
-        font-size: 2.4rem;
-        padding: 0 1rem;
+        font-size: 2.5rem;
+    }
+
+    .style-section,
+    .area-section {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .main-image {
+        width: 100%;
+        height: 300px;
+    }
+
+    .project-overview {
+        width: 100%;
+    }
+
+    .image-grid-2,
+    .image-grid-3 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .gallery-item {
+        width: 100%;
+        height: 300px;
     }
 
     .gallery-item img {
-        max-height: 300px;
-        padding: 0.8rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .full-width img {
-        max-height: 350px;
-    }
-
+    .design-execution,
+    .material-efficiency,
     .text-section {
-        padding: 1.5rem;
-        margin: 1.5rem auto;
+        width: 100%;
     }
 }
 
@@ -135,4 +208,584 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Project Container */
+.project-container {
+    max-width: var(--container-width);
+    margin: 40px auto;
+    padding: var(--spacing-unit);
+    display: grid;
+    gap: var(--spacing-unit);
+    grid-template-columns: repeat(2, 1fr);
+    background: #000000;
+}
+
+.project-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.project-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-column: 1 / -1;
+}
+
+/* Section Styles */
+.style-section,
+.area-section,
+.project-overview,
+.design-execution,
+.material-efficiency,
+.text-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.style-section:hover,
+.area-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+}
+
+.style-section h2,
+.area-section h2,
+.project-overview h2,
+.design-execution h2,
+.material-efficiency h2,
+.interior-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--ameya-accent);
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.style-section p,
+.area-section p {
+    font-size: 1.2rem;
+    color: var(--ameya-text);
+    line-height: 1.6;
+}
+
+/* Image Styles */
+.main-image {
+    grid-column: 1 / 2;
+    aspect-ratio: 16/10;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+    position: relative;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.main-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Grid Layouts */
+.image-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-unit);
+    grid-column: 1 / -1;
+}
+
+.image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-unit);
+    grid-column: 1 / -1;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .image-grid-2,
+    .image-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Laptop View (1024px and up) */
+@media screen and (min-width: 1024px) {
+    .project-container {
+        gap: 25px;
+        padding: 30px;
+    }
+
+    .gallery-item {
+        height: 220px;
+    }
+
+    .main-image {
+        min-height: 400px;
+    }
+}
+
+/* Tablet View (768px to 1023px) */
+@media screen and (max-width: 1023px) {
+    :root {
+        --spacing-unit: 20px;
+    }
+
+    .project-container {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .gallery-item {
+        height: 180px;
+    }
+
+    .image-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile View (up to 767px) */
+@media screen and (max-width: 767px) {
+    :root {
+        --spacing-unit: 15px;
+    }
+
+    .project-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .main-image {
+        grid-column: 1 / -1;
+        height: 200px;
+    }
+
+    .project-overview {
+        grid-column: 1 / -1;
+    }
+
+    .image-grid-2,
+    .image-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+
+    .style-section,
+    .area-section,
+    .project-overview,
+    .design-execution,
+    .material-efficiency,
+    .text-section {
+        padding: 20px;
+       
+    }
+}
+
+/* Small Mobile View (up to 480px) */
+@media screen and (max-width: 480px) {
+    .project-container {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .project-header h1 {
+        font-size: 2rem;
+    }
+
+    .gallery-item {
+        height: 250px;
+    }
+
+    .style-section,
+    .area-section,
+    .project-overview,
+    .design-execution,
+    .material-efficiency,
+    .text-section {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+/* Loading States */
+.gallery-item img {
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item img[loading] {
+    opacity: 0.5;
+}
+
+/* All paragraph text */
+p {
+    color: var(--ameya-text);  /* Black color for all paragraph text */
+}
+
+/* Hover Effects */
+.gallery-item img {
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.02);
+}
+
+/* Style and Area Section */
+.style-section,
+.area-section {
+    color: black;
+}
+
+.style-section h2,
+.area-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* Main Image and Project Overview */
+.main-image {
+    grid-column: 1 / 2;
+    aspect-ratio: 16/10;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.project-overview {
+    grid-column: 2 / 3;
+    background: var(--section-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    height: 100%;
+}
+
+/* Design & Execution Section */
+.design-execution {
+    grid-column: 1 / -1;
+    background: var(--section-bg);
+    padding: 25px;
+   
+}
+
+/* Material Efficiency */
+.material-efficiency {
+    grid-column: 1 / -1;
+    background: var(--section-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+}
+
+/* Interior Section */
+.interior-section {
+    grid-column: 1 / -1;
+}
+
+.interior-section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Image Grid 3 */
+.image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-unit);
+    grid-column: 1 / -1;
+}
+
+.image-grid-3 .gallery-item {
+    aspect-ratio: 3/4;
+}
+
+/* Text Sections */
+.text-section {
+    grid-column: 1 / -1;
+    background: var(--section-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: var(--spacing-unit) 0;
+}
+
+/* New sections and adjustments */
+.project-overview {
+    grid-column: 2 / 3;
+    height: 100%;
+}
+
+.design-execution,
+.material-efficiency {
+    grid-column: 1 / -1;
+}
+
+/* Section Headers */
+h2 {
+    font-size: 2rem;
+    color: var(--ameya-accent);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ameya-accent), transparent);
+}
+
+/* Paragraphs */
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--ameya-text);
+    opacity: 0.9;
+}
+
+/* List Styling */
+.material-efficiency p {
+    margin-bottom: 15px;
+}
+
+/* Image Grids */
+.image-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-unit);
+    grid-column: 1 / -1;
+}
+
+.image-grid-2 .gallery-item {
+    aspect-ratio: 1/1;
+    height: 400px;
+}
+
+.image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-unit);
+    grid-column: 1 / -1;
+    margin: var(--spacing-unit) 0;
+}
+
+.image-grid-3 .gallery-item {
+    aspect-ratio: 3/4;
+    height: 500px;
+}
+
+.gallery-item {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Interior & Aesthetics Section */
+.interior-aesthetics {
+    grid-column: 1 / -1;
+    color: #ffffff;
+    margin: var(--spacing-unit) 0;
+}
+
+.interior-aesthetics h2 {
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.interior-aesthetics p {
+    color: #000000;
+    margin-bottom: var(--spacing-unit);
+}
+
+/* Outdoor Expression Section */
+.outdoor-expression {
+    grid-column: 1 / -1;
+}
+
+.outdoor-expression h2 {
+    color: var(--ameya-text);
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .image-grid-2 .gallery-item {
+        height: 350px;
+    }
+    
+    .image-grid-3 .gallery-item {
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .project-container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .project-header h1 {
+        font-size: 2.8rem;
+        letter-spacing: 4px;
+    }
+
+    .main-image,
+    .project-overview {
+        grid-column: 1 / -1;
+    }
+
+    .main-image {
+        height: 300px;
+    }
+
+    .image-grid-2,
+    .image-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .image-grid-2 .gallery-item,
+    .image-grid-3 .gallery-item {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --spacing-unit: 15px;
+    }
+
+    .project-container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .project-header h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .image-grid-2 .gallery-item,
+    .image-grid-3 .gallery-item {
+        height: 250px;
+    }
+
+    .project-overview,
+    .design-execution,
+    .material-efficiency,
+    .text-section {
+        padding: 20px;
+    }
+}
+
+/* Navigation Mobile Adjustments */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--ameya-bg);
+        padding: 15px;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* Fix for iOS devices */
+@supports (-webkit-touch-callout: none) {
+    .project-container {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+}
+
+/* Ensure images don't overflow */
+img {
+    max-width: 100%;
+    height: auto;
 }
