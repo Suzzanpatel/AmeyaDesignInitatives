@@ -287,31 +287,29 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (projectCardsWrapper && prevButton && nextButton) {
     const cards = projectCardsWrapper.querySelectorAll('.project-card');
-    const cardWidth = 300; // Base card width
-    const cardMargin = 30; // Gap between cards
-    const totalCardWidth = cardWidth + cardMargin;
-    
     let currentPosition = 0;
     let startX = 0;
     let isDragging = false;
+    let isScrolling = false;
+    let scrollTimeout;
     
     // Update card width based on screen size
     function updateCardWidth() {
-      let newCardWidth = cardWidth;
-      let newCardMargin = cardMargin;
+      let newCardWidth = 400;
+      let newCardMargin = 40;
       
       if (window.innerWidth <= 576) {
-        newCardWidth = 200;
+        newCardWidth = 280;
         newCardMargin = 15;
       } else if (window.innerWidth <= 768) {
-        newCardWidth = 220;
+        newCardWidth = 300;
         newCardMargin = 20;
       } else if (window.innerWidth <= 992) {
-        newCardWidth = 240;
-        newCardMargin = 25;
-      } else if (window.innerWidth <= 1200) {
-        newCardWidth = 280;
+        newCardWidth = 340;
         newCardMargin = 30;
+      } else if (window.innerWidth <= 1200) {
+        newCardWidth = 380;
+        newCardMargin = 35;
       }
       
       return { width: newCardWidth, margin: newCardMargin };
@@ -322,11 +320,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const { width, margin } = updateCardWidth();
       const totalWidth = cards.length * (width + margin);
       const containerWidth = projectCardsWrapper.parentElement.clientWidth;
-      return Math.max(0, totalWidth - containerWidth);
+      const maxScroll = Math.max(0, totalWidth - containerWidth + margin); // Add margin to ensure last card is fully visible
+      return maxScroll;
     }
     
-    // Move the carousel
-    function moveCarousel(position) {
+    // Move the carousel with smooth animation
+    function moveCarousel(position, smooth = true) {
       const maxScroll = getMaxScrollPosition();
       
       // Ensure position stays within bounds
@@ -334,25 +333,14 @@ document.addEventListener('DOMContentLoaded', function() {
       if (position > maxScroll) position = maxScroll;
       
       currentPosition = position;
+      
+      // Apply smooth transition only when not dragging
+      projectCardsWrapper.style.transition = smooth ? 'transform 0.5s ease-in-out' : 'none';
       projectCardsWrapper.style.transform = `translateX(${-position}px)`;
       
-      // Add cinematic tilt effect to cards
-      cards.forEach((card, index) => {
-        const centerPosition = currentPosition + (projectCardsWrapper.parentElement.clientWidth / 2);
-        const cardCenter = index * totalCardWidth + (totalCardWidth / 2);
-        const distanceFromCenter = cardCenter - centerPosition;
-        const normalizedDistance = distanceFromCenter / (projectCardsWrapper.parentElement.clientWidth / 2);
-        const rotateY = normalizedDistance * 15; // Max 15 degrees rotation
-        
-        card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) translateZ(${Math.abs(rotateY)}px)`;
-        
-        // Adjust shadow based on tilt
-        if (rotateY > 0) {
-          card.style.boxShadow = `-15px 15px 35px rgba(0, 0, 0, 0.5)`;
-        } else {
-          card.style.boxShadow = `15px 15px 35px rgba(0, 0, 0, 0.5)`;
-        }
-      });
+      // Update button states
+      prevButton.disabled = position <= 0;
+      nextButton.disabled = position >= maxScroll;
     }
     
     // Event handlers for buttons
@@ -366,60 +354,97 @@ document.addEventListener('DOMContentLoaded', function() {
       moveCarousel(currentPosition + (width + margin));
     });
     
-    // Mouse and touch event handlers for swipe functionality
+    // Touch event handlers with improved detection
+    projectCardsWrapper.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      projectCardsWrapper.style.transition = 'none';
+      
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    }, { passive: true });
+    
+    projectCardsWrapper.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      
+      const x = e.touches[0].clientX;
+      const diff = startX - x;
+      
+      isScrolling = true;
+      moveCarousel(currentPosition + diff, false);
+      startX = x;
+    }, { passive: true });
+    
+    projectCardsWrapper.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      
+      isDragging = false;
+      projectCardsWrapper.style.transition = 'transform 0.5s ease-in-out';
+      
+      const { width, margin } = updateCardWidth();
+      const cardWidth = width + margin;
+      const nearestCard = Math.round(currentPosition / cardWidth);
+      moveCarousel(nearestCard * cardWidth);
+      
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 100);
+    });
+    
+    // Mouse event handlers with improved detection
     projectCardsWrapper.addEventListener('mousedown', (e) => {
       isDragging = true;
       startX = e.clientX;
       projectCardsWrapper.style.transition = 'none';
       e.preventDefault();
+      
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
     });
-    
-    projectCardsWrapper.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startX = e.touches[0].clientX;
-      projectCardsWrapper.style.transition = 'none';
-    }, { passive: true });
     
     window.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
+      
       const x = e.clientX;
       const diff = startX - x;
-      moveCarousel(currentPosition + diff);
+      
+      isScrolling = true;
+      moveCarousel(currentPosition + diff, false);
       startX = x;
     });
-    
-    window.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      const x = e.touches[0].clientX;
-      const diff = startX - x;
-      moveCarousel(currentPosition + diff);
-      startX = x;
-    }, { passive: true });
     
     window.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        projectCardsWrapper.style.transition = 'transform 0.5s ease-in-out';
-      }
-    });
-    
-    window.addEventListener('touchend', () => {
-      if (isDragging) {
-        isDragging = false;
-        projectCardsWrapper.style.transition = 'transform 0.5s ease-in-out';
-      }
+      if (!isDragging) return;
+      
+      isDragging = false;
+      projectCardsWrapper.style.transition = 'transform 0.5s ease-in-out';
+      
+      const { width, margin } = updateCardWidth();
+      const cardWidth = width + margin;
+      const nearestCard = Math.round(currentPosition / cardWidth);
+      moveCarousel(nearestCard * cardWidth);
+      
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 100);
     });
     
     // Handle window resize
     window.addEventListener('resize', () => {
       projectCardsWrapper.style.transition = 'none';
-      moveCarousel(currentPosition);
+      const { width, margin } = updateCardWidth();
+      const cardWidth = width + margin;
+      const nearestCard = Math.round(currentPosition / cardWidth);
+      moveCarousel(nearestCard * cardWidth);
+      
       setTimeout(() => {
         projectCardsWrapper.style.transition = 'transform 0.5s ease-in-out';
       }, 50);
     });
     
-    // Initialize cards position
+    // Initialize carousel
     moveCarousel(0);
   }
   
@@ -636,7 +661,10 @@ document.addEventListener('DOMContentLoaded', function() {
       if (index < 0) index = slides.length - 1;
       if (index >= slides.length) index = 0;
       
-      slides.forEach(slide => slide.classList.remove('active'));
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+        slide.style.transition = 'opacity 0.5s ease-in-out';
+      });
       dots.forEach(dot => dot.classList.remove('active'));
       
       slides[index].classList.add('active');
@@ -662,6 +690,15 @@ document.addEventListener('DOMContentLoaded', function() {
       dot.addEventListener('click', () => {
         showSlide(index);
       });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        showSlide(currentIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        showSlide(currentIndex + 1);
+      }
     });
     
     // Swipe functionality for testimonials
@@ -711,10 +748,8 @@ document.addEventListener('DOMContentLoaded', function() {
       touchEndX = null;
     }
     
-    // Auto rotate testimonials every 10 seconds
-    setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 10000);
+    // Initialize first slide
+    showSlide(0);
   }
 });
 
