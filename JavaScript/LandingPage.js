@@ -96,24 +96,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle dropdown menus on mobile
   navItems.forEach(item => {
     const link = item.querySelector('a');
-    if (link) {
+    const dropdownContent = item.querySelector('.dropdown-content');
+    
+    if (link && dropdownContent) {
       link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 968) {
+        if (window.innerWidth <= 768) {
           e.preventDefault();
-          const content = item.querySelector('.dropdown-content');
-          if (content) {
-            // Close other dropdowns
-            navItems.forEach(otherItem => {
-              if (otherItem !== item) {
-                const otherContent = otherItem.querySelector('.dropdown-content');
-                if (otherContent) {
-                  otherContent.style.display = 'none';
-                }
-              }
-            });
-            // Toggle current dropdown
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-          }
+          e.stopPropagation();
+          
+          // Close other dropdowns
+          navItems.forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // Toggle current dropdown
+          item.classList.toggle('active');
         }
       });
     }
@@ -126,24 +125,18 @@ document.addEventListener('DOMContentLoaded', function() {
       menuIcon.innerHTML = '☰';
       // Close all dropdowns
       navItems.forEach(item => {
-        const content = item.querySelector('.dropdown-content');
-        if (content) {
-          content.style.display = 'none';
-        }
+        item.classList.remove('active');
       });
     }
   });
 
   // Close menu when window is resized above mobile breakpoint
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 968) {
+    if (window.innerWidth > 768) {
       navLinks.classList.remove('active');
       menuIcon.innerHTML = '☰';
       navItems.forEach(item => {
-        const content = item.querySelector('.dropdown-content');
-        if (content) {
-          content.style.display = '';
-        }
+        item.classList.remove('active');
       });
     }
   });
