@@ -331,10 +331,12 @@ a:hover {
 }
 
 .slide.active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1.5s ease-in-out, transform 7s ease-in-out;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  transform: scale(1.05);
+  filter: brightness(1.25) contrast(1.15) saturate(1.1);
 }
+
 
 .slide-content {
   position: absolute;
@@ -351,26 +353,15 @@ a:hover {
 }
 
 .slide.active .slide-content {
-  opacity: 1;
-  transform: translate(-50%, -50%) translateY(0);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  transform: scale(1.05);
+  filter: brightness(1.50) ;
 }
 
-.slide-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
 
-.slide-content p {
-  font-size: 1.4rem;
-  line-height: 1.6;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  margin: 0;
-}
+
+
 
 .slide::before {
   content: '';
