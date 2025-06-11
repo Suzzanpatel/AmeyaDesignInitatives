@@ -304,38 +304,12 @@
 
 /* Adjust main content to account for fixed navbar */
 .page-title {
-    margin-top: 20px;
-    padding: 1rem 2rem;
-    text-align: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-/* Mobile styles */
-@media screen and (max-width: 768px) {
-    .navbar {
-        position: sticky;
-        transform: none;
-    }
-
-    .navbar.hidden {
-        transform: none;
-    }
-
-    .page-title {
-        margin-top: 10px;
-        padding: 1rem;
-    }
-}
-
-/* Page Title Styles */
-.page-title {
     padding: 4rem 2rem;
     text-align: center;
     background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
     position: relative;
     margin-bottom: 2rem;
+    margin-top: 100px; /* Add margin-top to create space below navbar */
 }
 
 .page-title h1 {
@@ -613,7 +587,7 @@
     }
 
     .page-title {
-        padding: 3rem 1rem;
+        padding: 3rem 1.5rem;
     }
 
     .page-title h1 {
@@ -979,4 +953,27 @@ body {
     padding: 0;
     overflow-x: hidden;
     width: 100%;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .page-title {
+        margin-top: 80px; /* Slightly less margin for mobile */
+        padding: 3rem 1.5rem;
+    }
+
+    .page-title h1 {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .page-title {
+        margin-top: 60px; /* Even less margin for smaller screens */
+        padding: 2.5rem 1rem;
+    }
+
+    .page-title h1 {
+        font-size: 1.8rem;
+    }
 }

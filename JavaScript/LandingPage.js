@@ -751,6 +751,48 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize first slide
     showSlide(0);
   }
+
+  // Video playback handling
+  const video = document.getElementById('landing-video');
+  
+  // Ensure video plays
+  video.play().catch(function(error) {
+    console.log("Video play failed:", error);
+  });
+
+  // Handle video end
+  video.addEventListener('ended', function() {
+    video.play(); // Ensure it continues playing even if loop fails
+  });
+
+  // Handle any pause events
+  video.addEventListener('pause', function() {
+    video.play();
+  });
+
+  // Handle visibility change
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      video.play();
+    }
+  });
+
+  // Handle scroll events
+  window.addEventListener('scroll', function() {
+    if (isElementInViewport(welcomeSection)) {
+      navbar.style.opacity = '0';
+      navbar.style.pointerEvents = 'none';
+    } else {
+      navbar.style.opacity = '1';
+      navbar.style.pointerEvents = 'auto';
+    }
+  });
+
+  // Initial check
+  if (isElementInViewport(welcomeSection)) {
+    navbar.style.opacity = '0';
+    navbar.style.pointerEvents = 'none';
+  }
 });
 
 // For backward compatibility with other code
