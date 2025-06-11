@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Demystified - ADi Publications</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../css/LandingPage.css">
+    <link rel="stylesheet" href="../css/books.css">
+    
+    <link rel="icon" type="image/png" href="../Assets/logo2.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="LandingPage.html">
+                <img src="../Assets/Logo.png" alt="Ameya Design Logo">
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="LandingPage.html">Home</a>
+            <div class="nav-item">
+                <a href="#" class="dropdown-toggle">Projects<span class="dropdown-indicator">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="All_ArchitectureProjects.html">All Projects</a>
+                    <a href="Residential_Home.html">Residential</a>
+                    <a href="Commercial.html">Commercial</a>
+                    <a href="Interior.html">Interior</a>
+                    <a href="Architecture_Consultation.html">Consultation</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="dropdown-toggle">Blogs<span class="dropdown-indicator">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="False_Ceiling.html">False Ceiling Design</a>
+                    <a href="Bed_Designs.html">Bed Designs</a>
+                    <a href="Decor_Lights.html">Decor Lights</a>
+                    <a href="Wall_Textures.html">Wall Textures</a>
+                </div>
+            </div>
+            <a href="Awards_Magazines.html">Awards & Magazines</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+        </nav>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <!-- Book Section -->
+    <section class="book-section">
+        <div class="book-container">
+            <h1>Construction Demystified by Santosh Bafna</h1>
+            <div class="book-description">
+                <p>Explore the comprehensive guide to construction fundamentals and advanced techniques. Click on the book cover to download your copy of "Construction Demystified" by Santosh Bafna.</p>
+            </div>
+           
+            <div class="book-content">
+                <a href="../Assets/Construction Demystified.pdf" download class="book-cover">
+                    <img src="../Assets/book cover.png" alt="Construction Demystified Book Cover">
+                    <div class="download-overlay">
+                        <span>Click to Download PDF</span>
+                    </div>
+                </a>
+               
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navLinks = document.querySelector('.nav-links');
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+            // Toggle menu on menu icon click
+            menuIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                menuIcon.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Handle dropdown toggles
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const navItem = toggle.closest('.nav-item');
+                        
+                        // Close other dropdowns
+                        document.querySelectorAll('.nav-item').forEach(item => {
+                            if (item !== navItem) {
+                                item.classList.remove('active');
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        navItem.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar')) {
+                    navLinks.classList.remove('active');
+                    menuIcon.textContent = '☰';
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                }
+            });
+
+            // Prevent menu close when clicking inside nav
+            navLinks.addEventListener('click', (e) => {
+                if (!e.target.closest('.nav-item') && !e.target.closest('a')) {
+                    e.stopPropagation();
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    menuIcon.textContent = '☰';
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
