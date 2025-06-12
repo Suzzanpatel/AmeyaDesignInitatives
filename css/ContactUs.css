@@ -18,12 +18,13 @@ body {
 /* Hero Section */
 .contact-hero {
     position: relative;
-    height: 20vh;
+    height: 40vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
+    margin-top: 100px;
 }
 
 .hero-image {
@@ -195,7 +196,8 @@ body {
 
 @media screen and (max-width: 768px) {
     .contact-hero {
-        height: 20vh;
+        height: 30vh;
+        margin-top: 80px;
     }
 
     .contact-container {
@@ -227,7 +229,8 @@ body {
 
 @media screen and (max-width: 576px) {
     .contact-hero {
-        height: 15vh;
+        height: 25vh;
+        margin-top: 60px;
     }
 
     .contact-info {
