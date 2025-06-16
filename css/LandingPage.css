@@ -693,7 +693,7 @@ a:hover {
   font-size: 1.5rem;
   margin-bottom: 15px;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 1px;
   transform: translateZ(80px);
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -710,7 +710,7 @@ a:hover {
   letter-spacing: 1px;
   cursor: pointer;
   font-size: 0.9rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   transition: all 0.3s ease;
   text-decoration: none;
   margin-top: 12px;
@@ -770,7 +770,7 @@ a:hover {
   font-weight: 500;
   letter-spacing: 1px;
   cursor: pointer;
-  text-transform: uppercase;
+  text-transform: capitalize;
   transition: all 0.3s ease;
 }
 
