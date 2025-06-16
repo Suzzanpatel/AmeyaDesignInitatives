@@ -409,8 +409,25 @@ body {
     }
 
     .main-image {
-        grid-column: 1 / -1;
-        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto !important;
+        min-height: unset !important;
+        aspect-ratio: unset !important;
+        background: #000; /* Optional: matches your site background */
+        padding: 0;
+    }
+
+    .main-image img {
+        width: 100%;
+        height: auto !important;
+        max-height: 70vw; /* Adjust as needed for your design */
+        object-fit: contain !important;
+        display: block;
+        margin: 0 auto;
+        background: #000; /* Optional: matches your site background */
+        border-radius: var(--border-radius);
     }
 
     .project-overview {
@@ -435,6 +452,11 @@ body {
     .text-section {
         padding: 20px;
        
+    }
+
+    .image-grid-3 .gallery-item {
+        height: 320px;
+        aspect-ratio: 4/3;
     }
 }
 
@@ -1053,3 +1075,15 @@ img {
 .footer .socials img:hover {
     transform: scale(1.1);
 }
+@media screen and (max-width: 767px) {
+    .image-grid-3 .gallery-item {
+      height: 250px !important;
+      aspect-ratio: 3/5 !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .image-grid-3 .gallery-item img {
+      object-fit: contain !important;
+      background: #000; /* or your preferred background */
+    }
+  }
