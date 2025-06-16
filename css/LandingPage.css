@@ -2208,16 +2208,16 @@ a:hover {
 }
 
 .why-us-container {
-  margin-top: 3rem;
+  margin: 2rem auto;
   text-align: center;
+  max-width: 650px;
 }
 
 .why-us-flow {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  max-width: 800px;
+  gap: 1.5rem;
   margin: 0 auto;
 }
 
@@ -2225,20 +2225,28 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(17, 17, 17, 0.95);
-  padding: 2rem;
+  background: rgba(27, 27, 27, 0.8);
+  padding: 1.5rem;
   border-radius: 12px;
   width: 100%;
   text-align: center;
   position: relative;
-  border: 1px solid rgba(255, 204, 112, 0.1);
-  margin-bottom: 2.5rem;
+  border: 1px solid rgba(27, 27, 27, 0.1);
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 500px;
+}
+
+.why-us-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 204, 112, 0.1);
 }
 
 .why-us-item .number {
-  font-size: 1.4rem;
-  margin-bottom: 0.7rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
   color: #ffcc70;
+  font-family: 'Playfair Display', serif;
 }
 
 .why-us-item .content {
@@ -2247,21 +2255,24 @@ a:hover {
 }
 
 .why-us-item h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
   color: #ffcc70;
+  font-family: 'Playfair Display', serif;
 }
 
 .why-us-item p {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
 }
 
 /* Flow arrows */
 .flow-arrow {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  bottom: -2rem;
+  width: 20px;
+  height: 20px;
+  bottom: -1.5rem;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -2270,7 +2281,7 @@ a:hover {
   content: '';
   position: absolute;
   width: 2px;
-  height: 25px;
+  height: 20px;
   background: linear-gradient(to bottom, #ffcc70, rgba(255, 204, 112, 0.3));
   left: 50%;
   transform: translateX(-50%);
@@ -2279,8 +2290,8 @@ a:hover {
 .flow-arrow::after {
   content: '';
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-right: 2px solid #ffcc70;
   border-bottom: 2px solid #ffcc70;
   bottom: 0;
@@ -2288,29 +2299,51 @@ a:hover {
   transform: translateX(-50%) rotate(45deg);
 }
 
+/* Mobile Responsive Adjustments */
 @media screen and (max-width: 768px) {
+  .why-us-container {
+    width: 90%;
+  }
+  
+  .why-us-item {
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  
   .why-us-item .number {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
   }
+  
   .why-us-item h3 {
     font-size: 1.2rem;
   }
+  
   .why-us-item p {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .flow-arrow {
+    bottom: -1.2rem;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .why-us-item {
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  
   .why-us-item .number {
     font-size: 1rem;
-    margin-bottom: 0.4rem;
   }
+  
   .why-us-item h3 {
     font-size: 1.1rem;
   }
+  
   .why-us-item p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
